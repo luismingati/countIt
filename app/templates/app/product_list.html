@@ -1,0 +1,36 @@
+
+{% if request.user.is_authenticated %}
+  <p>{{request.user}}</p>
+  <a href="{% url 'logout' %}">Desconectar</a>
+{% else %}
+  <a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+<hr>
+<h1>Meus Produtos</h1>
+<a href="{% url 'product-create' %}">Adicionar Produto</a>
+
+<form method="GET">
+  <input type="text" name="search-area" value="{{search_input}}">
+  <button type="submit">Pesquisar</button>
+</form>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  {% for product in products %}
+  <tr>
+    <td>{{ product.title }}</td>
+    <td><a href="{% url 'product' product.id %}">Ver</a></td>
+    <td><a href="{% url 'product-update' product.id %}">Editar</a></td>
+    <td><a href="{% url 'product-delete' product.id %}">Deletar</a></td>
+
+  </tr>
+  {% empty %}
+  <p>Nenhum produto cadastrado ainda.</p>
+  {% endfor %}
+</table>
