@@ -2,4 +2,4 @@
 <p>Descrição do produto: {{product.description}}</p>
 <p>Quantidade no estoque: {{product.quantity}}</p>
 <p>Preço: R$ {{product.price}}</p>
-
+<a href="{% url 'vender_produto' product.id %}">Vender</a>

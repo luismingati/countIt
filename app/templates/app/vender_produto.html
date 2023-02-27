@@ -1,0 +1,7 @@
+<h1>Vender produto "{{ produto.title }}"</h1>
+<form method="post">
+  {% csrf_token %}
+  <label for="quantidade_vendida">Quantidade vendida:</label>
+  <input type="number" name="quantidade_vendida" value="{{ produto.quantity }}" min="1" max="{{ produto.quantity }}">
+  <input type="submit" value="Vender">
+</form>
