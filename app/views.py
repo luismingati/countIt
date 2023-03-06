@@ -12,6 +12,18 @@ from django.contrib.auth import login
 
 from .models import Product
 
+from django.shortcuts import render, get_object_or_404
+
+def vender_produto(request, pk):
+    produto = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        quantidade_vendida = int(request.POST.get('quantidade_vendida'))
+        try:
+            produto.atualizar_estoque(quantidade_vendida)
+        except ValueError as error:
+            return render(request, 'app/erro.html', {'error_message': str(error)})
+        return render(request, 'app/venda_concluida.html', {'produto': produto, 'quantidade_vendida': quantidade_vendida})
+    return render(request, 'app/vender_produto.html', {'produto': produto})
 
 class CustomLoginView(LoginView):
     template_name = 'app/login.html'
@@ -71,7 +83,7 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):
     model = Product
     fields = '__all__'
     success_url = reverse_lazy('products')
-
+    
 class ProductDelete(LoginRequiredMixin, DeleteView):
     model = Product
     context_object_name = 'product'
