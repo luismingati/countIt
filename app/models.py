@@ -9,6 +9,7 @@ class Product(models.Model):
   quantity = models.IntegerField(default=1)
   price = models.DecimalField(max_digits=6, decimal_places=2)
 
+
   def atualizar_estoque(self, quantidade_vendida):
     if quantidade_vendida > self.quantity:
       raise ValueError('Quantidade vendida é maior do que a quantidade em estoque.')
