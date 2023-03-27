@@ -26,4 +26,4 @@ Giovana Dantas Barreto Mariano - gdbm@cesar.school
 # Ferramentas
 Jira: https://easypdv.atlassian.net/jira/software/projects/EP/boards/1/backlog
 
-Figma: https://www.figma.com/file/RThxG8RsFhiIytMW3YmuZA/Easy-PDV?t=ao3Vng8uVVSGCpbI-1
+Figma: https://www.figma.com/file/L4wsHpCyzswN1dpXPZfnpe/Prancha-Principal?node-id=0-1&t=wlwz17dQFPAbZac2-0
