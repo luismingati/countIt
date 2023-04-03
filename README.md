@@ -29,3 +29,9 @@ Jira: https://easypdv.atlassian.net/jira/software/projects/EP/boards/1/backlog
 Figma: https://www.figma.com/file/L4wsHpCyzswN1dpXPZfnpe/Prancha-Principal?node-id=0-1&t=wlwz17dQFPAbZac2-0
 
 Protótipo Navegável Figma: https://www.figma.com/proto/L4wsHpCyzswN1dpXPZfnpe/Prancha-Principal?node-id=5-20&scaling=scale-down&page-id=0%3A1&starting-point-node-id=5%3A20
+
+Diagrama de Atividades:
+
+Deploy:
+
+Experiência de Programação em Pares:
