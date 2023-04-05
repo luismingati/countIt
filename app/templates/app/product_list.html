@@ -1,11 +1,12 @@
 <h1>Produtos</h1>
+<a href="{% url 'home' %}">Home</a>
 <table>
     <tr>
         <th>Item</th>
         <th>Quantidade</th>
         <th>Preço</th>
-    </tr>
         <th>Ações</th>
+    </tr>
     </tr>
     {% for product in products %}
     <tr>
@@ -16,3 +17,4 @@
     </tr>
     {% endfor %}
 </table>
+<a href="{% url 'product-create' %}">Cadastrar Produto</a>

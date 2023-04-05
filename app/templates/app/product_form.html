@@ -1,7 +1,9 @@
 <h1>Cadastro de Produto</h1>
+<a href="{% url 'home' %}">Home</a>
 
 <form method="POST">
   {% csrf_token %}
   {{form.as_p}}
   <input type="submit" value="Enviar">
 </form>
+<a href="{% url 'products'%}">Voltar</a>
