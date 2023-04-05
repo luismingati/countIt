@@ -4,12 +4,14 @@
         <th>Item</th>
         <th>Quantidade</th>
         <th>Preço</th>
+        <th>Ações</th>
     </tr>
-    {%for product in product_list %}
+    {% for product in products %}
     <tr>
         <td>{{product.name}}</td>
         <td>{{product.quantity}}</td>
         <td>R${{product.price}}</td>
+        <td><a href="{% url 'product' product.id %}">Ver</a></td>
     </tr>
     {% endfor %}
 </table>

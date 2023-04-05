@@ -1,0 +1,12 @@
+<h1>Produto: {{object}}</h1>
+<table>
+    <tr>
+        <th>Quantidade</th>
+        <th>Preço</th>
+    </tr>
+    <tr>
+        <td>{{product.quantity}}</td>
+        <td>R${{product.price}}</td>
+    </tr>
+</table>
+<a href="{% url 'products'%}">Voltar</a>
