@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.views.generic.list import ListView
+from .models import Product
 
-def productList(request):
-    return render(request, 'index.html')
+class ProductList(ListView):
+    model = Product
 

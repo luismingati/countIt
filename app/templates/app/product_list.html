@@ -1,0 +1,15 @@
+<h1>Produtos</h1>
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
+    </tr>
+    {%for product in product_list %}
+    <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.quantity}}</td>
+        <td>R${{product.price}}</td>
+    </tr>
+    {% endfor %}
+</table>
