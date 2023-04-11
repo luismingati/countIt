@@ -7,7 +7,6 @@ class Product(models.Model):
     name = models.CharField(max_length=150, null=True, blank=True, unique=True)
     quantity = models.IntegerField()
     price = models.DecimalField(max_digits=9, decimal_places=2)
-    productId = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     def __str__(self): 
         return self.name
