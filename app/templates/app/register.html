@@ -1,0 +1,10 @@
+<h1>Cadastro</h1>
+
+<form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url 'home' %}">Voltar</a>
+    <button type='submit'>
+        Cadastrar
+    </button>
+</form>
