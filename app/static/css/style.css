@@ -1,0 +1,52 @@
+.navbar{
+    padding: 24px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F67D1A;
+    box-shadow: 0px 0px 15px 0px #0000009f;
+}
+
+.links{
+    display: flex;
+    gap: 30px;
+    font-family:'Roboto', sans-serif;
+}
+
+.login,.register{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login{
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 25px;
+    color: white;
+}
+
+.register{
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: white;
+    color: #F67D1A;
+}
+
+@media only screen and (max-width:768px){
+    .navbar{
+        background-color: #F67D1A;
+        padding: 10px 24px;
+    }
+    .logo{
+        width: 100px;
+        height: 22px;
+    }
+    .login,.register{
+        padding: 10px;
+    }
+    .links{
+        gap: 10px;
+    }
+}
+

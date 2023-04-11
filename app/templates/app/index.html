@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <link rel="stylesheet" href="../../static/css/reset.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <title>CountIT</title>
 </head>
+
 <body>
-    <h1>CountIt</h1>
-    <a href="{% url 'login' %}">Entrar</a>
-    <a href="{% url 'products' %}">Entrar no Estoque!</a>
-    <a href="{% url 'register' %}">Cadastrar-se</a>
+    <header>
+        <div class="navbar">
+            <img class="logo" src="../../static/images/logo.png" alt="Logo countIT">
+            <div class="links">
+                <a class="login" href="{% url 'login' %}">Entrar</a>
+                <a class="register" href="{% url 'register' %}">Cadastrar-se</a>
+            </div>
+        </div>
+    </header>
+    
 </body>
 </html>
