@@ -48,18 +48,33 @@ nav{
 form {
     width: 100%;
     display: flex;
+    gap: 30px;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 }
 
+form p{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+form p label{
+    padding-left: 5px;
+}
+form p input{
+    width: 100%;
+    height: 25px;
+    margin-top: 5px;
+}
 .form-login {
     width: 100%;
     height: 230px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    padding: 0 10px;
 }
 
 .form-login strong {
@@ -70,17 +85,14 @@ form {
     font-size: 140%;
     font-weight: bold;
 }
-
-.email,
-.password {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 1em;
-    align-items: center;
+.new-user{
+    font-size: 10px;
 }
-
-.form input {
+.new-user a{
+    text-decoration: none;
+    color: #FF6600;
+}
+/* .form input {
     padding-bottom: .5em;
     height: 30px;
     outline: none;
@@ -88,7 +100,7 @@ form {
     border-radius: 5px;
     padding: 10px;
     align-items: center;
-}
+} */
 
 .btn-login{
     width: 200px;
@@ -99,6 +111,7 @@ form {
     color: #ffffff;
     font-weight: bold;
     font-size: 1em;
+    align-self: center;
 }
 .btn-login:hover{
     transition: all ease .5s;
