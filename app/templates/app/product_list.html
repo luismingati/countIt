@@ -1,26 +1,35 @@
-{% if request.user.is_authenticated %}
-    <p>{{request.user}}</p>
-    <a href="{% url 'logout' %}">Sair</a>
-{% endif %}
-<h1>Produtos</h1>
-<a href="{% url 'home' %}">Home</a>
-<table>
-    <tr>
-        <th>Item</th>
-        <th>Quantidade</th>
-        <th>Preço</th>
-        <th>Ações</th>
-    </tr>
-    </tr>
-    {% for product in products %}
-    <tr>
-        <td>{{product.name}}</td>
-        <td>{{product.quantity}}</td>
-        <td>R${{product.price}}</td>
-        <td><a href="{% url 'product' product.id %}">Ver</a></td>
-        <td><a href="{% url 'product-update' product.id %}">Editar</a></td>
-        <td><a href="{% url 'product-delete' product.id %}">Apagar</a></td>
-    </tr>
-    {% endfor %}
-</table>
-<a href="{% url 'product-create' %}">Cadastrar Produto</a>
+{% extends 'app/base.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/reset.css">
+<link rel="stylesheet" href="/static/css/list_style.css">
+
+<div class="left-content">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        {% for product in products %}
+        <tbody>
+            <tr class="content">
+                <td>{{product.name}}</td>
+                <td>{{product.quantity}}</td>
+                <td>R${{product.price}}</td>
+                <td>
+                    <a class= "look" href="{% url 'product' product.id %}">Ver</a>
+                    <a class= "edit" href="{% url 'product-update' product.id %}">Editar</a>
+                </td> 
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+<div class="right-content">
+    <a href="{% url 'product-create' %}">Cadastrar Produto</a>
+</div>
+{% endblock content %}

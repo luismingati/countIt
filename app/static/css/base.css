@@ -1,0 +1,48 @@
+header .navbar {
+  background-color: #F67D1A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 80px;
+  margin-bottom: 30px;
+}
+
+header .navbar .links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+header .navbar .links .vendas{
+  color: #EEA16F;
+  border-bottom: 1px solid #EEA16F;
+  cursor: default;
+}
+header .navbar .links a{
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+header .navbar .user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+header .navbar .user a{
+  margin-top: 3px;
+  font-size: 16px;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  header .navbar {
+    padding: 24px 40px;
+  }
+  header .navbar .logo{
+    display: none;
+  }
+  header .navbar .links {
+    gap: 16px;
+  }
+}
