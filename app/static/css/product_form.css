@@ -1,0 +1,78 @@
+section {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 80px auto;
+  width: 60vw;
+}
+section .back {
+  background-color: green;
+  padding: 15px;
+  border: 1px solid green;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  width: 100px;
+  align-self: flex-start;
+}
+section .container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    width: 30vw;
+    padding: 50px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    align-self: center;
+}
+section .container .title {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-bottom: 24px;
+    align-self: center;
+}
+section .container form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 30px;
+}
+section .container form p {
+  display: flex;
+  flex-direction: column;
+}
+section .container form p label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+section .container form p input {
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  font-size: 18px;
+}
+section .container form p input:focus {
+  outline: none;
+  border: 1px solid #F67D1A;
+}
+
+section .container form .button {
+  align-self: center;
+  
+  background-color: #F67D1A;
+  padding: 12px 20px;
+  border: 1px solid #F67D1A;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  width: 120px;
+}

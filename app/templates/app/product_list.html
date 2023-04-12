@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/static/css/list_style.css">
 
 <div class="left-content">
+    
     <table class="content-table">
         <thead>
             <tr>
@@ -29,6 +30,9 @@
     </table>
 </div>
 <div class="right-content">
+    {% if not products%}
+        <h1 class="no-products">Você ainda não tem produtos cadastrados.</h1>
+    {% endif %}
     <a href="{% url 'product-create' %}">Cadastrar Produto</a>
 </div>
 {% endblock content %}

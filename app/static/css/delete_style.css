@@ -22,7 +22,7 @@
     margin-bottom: 20px ;
 }
 
-.product_delete input{
+.product_delete button{
     height: 40px;
     width: 80px;
     text-decoration: none;

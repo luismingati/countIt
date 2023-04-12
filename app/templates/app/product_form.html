@@ -1,9 +1,18 @@
-<h1>Informações do Produto</h1>
-<a href="{% url 'home' %}">Home</a>
+{% extends 'app/base.html' %}
+{% block content %}
+{% block css%}
+<link rel="stylesheet" href="/static/css/product_form.css">
+{% endblock css%}
+<section>
+  <a class="back" href="{% url 'products'%}">Voltar</a>
 
-<form method="POST">
-  {% csrf_token %}
-  {{form.as_p}}
-  <input type="submit" value="Enviar">
-</form>
-<a href="{% url 'products'%}">Voltar</a>
+  <div class="container">
+    <h1 class="title">Informações do Produto</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Enviar">
+    </form>
+  </div>
+</section>
+{% endblock content %}

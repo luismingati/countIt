@@ -1,4 +1,4 @@
-section {
+section  {
   width: 100%;
   height: 100%;
   display: flex;
@@ -6,22 +6,30 @@ section {
   justify-content: center;
   flex-direction: column  ;
 }
-section .back {
+section .container  {
+  width: 60vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column  ;
+}
+section .container .back {
     background-color: #F67D1A;
     padding: 10px;
     margin: 10px;
     border: 1px solid #F67D1A;
     border-radius: 10px;
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
-    color: black;
+    color: white;
     text-decoration: none;
     width: 100px;
     align-self: flex-start;
 
 }
-section .product-detail {
+section .container .product-detail {
   display: flex;
   flex-direction: column;
   padding: 50px;
@@ -31,25 +39,25 @@ section .product-detail {
   margin-top: 30px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
-section .product-detail .title {
+section .container .product-detail .title {
   font-size: 32px;
   font-weight: bold;
   text-transform: capitalize;
   margin-bottom: 24px;
 }
 
-section .product-detail .quantity {
+section .container .product-detail .quantity {
   font-size: 22px;
   margin-bottom: 24px;
 }
 
-section .product-detail .price {
+section .container .product-detail .price {
   font-size: 22px;
   margin-bottom: 24px;
   margin-bottom: 48px;
 }
 
-section .product-detail .buttons .delete {
+section .container .product-detail .buttons .delete {
   background-color: red;
   padding: 10px;
   margin: 10px;
@@ -61,8 +69,9 @@ section .product-detail .buttons .delete {
   color: white;
   text-decoration: none;
   width: 100px;
+  cursor: pointer;
 }
-section .product-detail .buttons .edit {
+section .container .product-detail .buttons .edit {
   background-color: rgb(255, 234, 0);
   padding: 10px;
   margin: 10px;
@@ -97,6 +106,7 @@ section .product-detail .buttons .edit {
   justify-content: center;
   border-radius: 20px;
 }
+
 #modal .product_delete .buttons{
   display: flex;
   flex-direction: row;

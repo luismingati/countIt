@@ -1,7 +1,12 @@
 *{
     text-decoration: none;
 }
-
+.no-products {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 30px;
+}
 .left-content{
     display: flex;
     justify-content: center;
@@ -11,7 +16,7 @@
 .right-content{
     display: flex;
     justify-content: center;
-
+    align-items: center;
 }
 
 .first-content{
