@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ProductCreate, ProductList, ProductDetail, Home, Login, Register, ProductUpdate
+from .views import ProductCreate, ProductList, ProductDetail, Home, Login, Register, ProductUpdate, ProductDelete
 from django.contrib.auth.views import LogoutView
 
 urlpatterns=[
@@ -11,4 +11,5 @@ urlpatterns=[
     path('estoque/<int:pk>/', ProductDetail.as_view(), name='product'),
     path('estoque/cadastro/', ProductCreate.as_view(), name='product-create'),
     path('estoque/editar/<int:pk>/', ProductUpdate.as_view(), name='product-update'),
+    path('estoque/deletar/<int:pk>/', ProductDelete.as_view(), name='product-delete'),
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, FormView, UpdateView
+from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +13,7 @@ from .models import Product
 class Home(TemplateView):
     template_name = 'app/index.html'
     context_object_name = 'home'
+    
 
 class Login(LoginView):
     template_name = 'app/login.html'
@@ -65,4 +66,9 @@ class ProductCreate(LoginRequiredMixin, CreateView):
 class ProductUpdate(UpdateView):
     model = Product
     fields = ['name', 'quantity', 'price']
+    success_url = reverse_lazy('products')
+
+class ProductDelete(DeleteView):
+    model = Product
+    context_object_name = 'product'
     success_url = reverse_lazy('products')

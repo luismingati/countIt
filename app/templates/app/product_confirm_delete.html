@@ -1,0 +1,6 @@
+<a href="{% url 'products' %}">Voltar</a>
+<form method="POST">
+    {% csrf_token %}
+    <p>Você tem certeza que deseja apagar esse produto? "{{product}}"</p>
+    <input value="Delete" type="submit" /> 
+</form>
