@@ -95,3 +95,21 @@
     color: #F67D1A;
     border: 2px solid #F67D1A;
 }
+
+@media only screen and (max-width:768px){
+    .hero {
+        flex-direction: column-reverse;
+        height: 100%;
+        padding: 26px 26px;
+        margin-top: 0;
+    }
+    .hero .left {
+        margin-top: 42px;
+        width: 100%;
+        align-items: center;
+    }
+    .hero .image {
+        width: 100%;
+        margin-top: 36px;
+    }
+}
