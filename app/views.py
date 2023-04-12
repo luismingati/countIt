@@ -2,13 +2,15 @@ from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .models import Product
+
+
 
 class Home(TemplateView):
     template_name = 'app/index.html'
@@ -66,6 +68,7 @@ class ProductCreate(LoginRequiredMixin, CreateView):
         return super(ProductCreate, self).form_valid(form)
 
 
-
-
-
+class ProductUpdate(UpdateView):
+    model = Product
+    fields = '__all__'
+    success_url = reverse_lazy('products')

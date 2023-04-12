@@ -18,6 +18,7 @@
         <td>{{product.quantity}}</td>
         <td>R${{product.price}}</td>
         <td><a href="{% url 'product' product.id %}">Ver</a></td>
+        <td><a href="{% url 'product-update' product.id %}">Editar</a></td>
     </tr>
     {% endfor %}
 </table>
