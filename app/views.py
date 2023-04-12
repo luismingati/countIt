@@ -13,6 +13,7 @@ from .models import Product
 class Home(TemplateView):
     template_name = 'app/index.html'
     context_object_name = 'home'
+    
 
 class Login(LoginView):
     template_name = 'app/login.html'
