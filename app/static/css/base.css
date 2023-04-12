@@ -3,8 +3,9 @@ header .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 80px;
+  padding: 0 80px;
   margin-bottom: 30px;
+  height: 70px;
 }
 
 header .navbar .links {
@@ -33,7 +34,8 @@ header .navbar .user a{
   margin-top: 3px;
   font-size: 16px;
   color: white;
-  border-bottom: 1px solid white;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {
