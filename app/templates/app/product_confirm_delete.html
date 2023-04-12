@@ -1,6 +1,11 @@
-<a href="{% url 'products' %}">Voltar</a>
-<form method="POST">
-    {% csrf_token %}
-    <p>Você tem certeza que deseja apagar esse produto? "{{product}}"</p>
-    <input value="Delete" type="submit" /> 
-</form>
+<link rel="stylesheet" href="/static/css/reset.css">
+<link rel="stylesheet" href="/static/css/delete_style.css">
+
+<div class="product_delete">
+    <form method="POST">
+        {% csrf_token %}
+        <p class="frase_delete">Você tem certeza que deseja apagar o produto "{{product}}" ?</p>
+        <a href="{% url 'products' %}">Voltar</a>
+        <input value="Apagar" type="submit" />  
+    </form>
+</div>
