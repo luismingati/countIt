@@ -14,13 +14,13 @@ header .navbar .links {
 }
 header .navbar .links .vendas{
   color: #EEA16F;
-  border-bottom: 1px solid #EEA16F;
+  border-bottom: 0px solid #EEA16F;
   cursor: default;
 }
 header .navbar .links a{
   text-decoration: none;
+  font-weight: bold;
   color: white;
-  border-bottom: 1px solid white;
 }
 
 header .navbar .user {
