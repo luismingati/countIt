@@ -1,10 +1,36 @@
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazer Login</title>
+    <link rel="stylesheet" href="../../static/css/reset.css">
+    <link rel="stylesheet" href="../../static/css/login.css">
+</head>
+<body>
+    
+    <nav>
+        <a href="{% url 'home' %}">Logo</a>
+    </nav>
+    <main class="main-login">
+        <div class="container">
+            <div class="login">
+                <div class="illustration"><img src="../../static/images/illustration.png" alt=""></div>
+                <div class="form-login">
+                                
+                    <strong>Fazer Login</strong>
 
-<form method='POST'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <a href="{% url 'home' %}">Voltar</a>
-    <button type='submit'>
-        Entrar
-    </button>
-</form>
+                    <form method='POST'>
+                        {% csrf_token %}
+                        <div class="form">{{ form.as_p }}</div>
+                        
+                        <button type='submit' class="btn-login">Entrar</button>
+                    </form>
+                    <p>Novo Usuário? <a href="{% url 'register' %}">Cadastre-se Aqui</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
