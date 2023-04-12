@@ -65,7 +65,6 @@ section .container form p input:focus {
 
 section .container form .button {
   align-self: center;
-  
   background-color: #F67D1A;
   padding: 12px 20px;
   border: 1px solid #F67D1A;
