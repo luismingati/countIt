@@ -15,7 +15,6 @@ header .navbar .links {
 }
 header .navbar .links .vendas{
   color: #EEA16F;
-  border-bottom: 0px solid #EEA16F;
   cursor: default;
 }
 header .navbar .links a{
