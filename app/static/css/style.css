@@ -1,15 +1,17 @@
 .navbar{
-    padding: 24px 80px;
+    background-color: #F67D1A;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(246, 125, 26);
-    box-shadow: 0px 0px 15px 0px #0000009f;
+    padding: 0 80px;
+    height: 70px;
 }
 
 .links{
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 40px;
+    height: 70vw;
 }
 
 .login,.register{
