@@ -10,5 +10,5 @@ urlpatterns=[
     path('estoque/', ProductList.as_view(), name= 'products'),
     path('estoque/<int:pk>/', ProductDetail.as_view(), name='product'),
     path('estoque/cadastro/', ProductCreate.as_view(), name='product-create'),
-    path('estoque-editar/<int:pk>/', ProductUpdate.as_view(), name='product-update'),
+    path('estoque/editar/<int:pk>/', ProductUpdate.as_view(), name='product-update'),
 ]

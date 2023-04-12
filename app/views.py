@@ -10,8 +10,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .models import Product
 
-
-
 class Home(TemplateView):
     template_name = 'app/index.html'
     context_object_name = 'home'
@@ -56,11 +54,7 @@ class ProductDetail(LoginRequiredMixin, DetailView):
 
 class ProductCreate(LoginRequiredMixin, CreateView):
     model = Product
-    fields = [
-        'name',
-        'quantity',
-        'price',
-    ]
+    fields = ['name', 'quantity', 'price']
     success_url = reverse_lazy('products')
 
     def form_valid(self, form):
@@ -70,5 +64,5 @@ class ProductCreate(LoginRequiredMixin, CreateView):
 
 class ProductUpdate(UpdateView):
     model = Product
-    fields = '__all__'
+    fields = ['name', 'quantity', 'price']
     success_url = reverse_lazy('products')
