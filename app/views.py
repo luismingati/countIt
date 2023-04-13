@@ -66,7 +66,7 @@ def create_product(request):
     else:
         form = ProductForm()
     return render(request, 'app/product_form.html', {'form': form})
-
+    
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
