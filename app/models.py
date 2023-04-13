@@ -7,6 +7,6 @@ class Product(models.Model):
     name = models.CharField(max_length=150, null=False, blank=False, unique=True)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     price = models.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(0.1)])
-
+    
     def __str__(self): 
         return self.name
