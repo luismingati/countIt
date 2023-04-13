@@ -2,7 +2,6 @@ from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
 from .models import Product
 from .forms import ProductForm
 from django.contrib.auth import authenticate, login
@@ -56,6 +55,7 @@ def product_detail(request, pk):
     context = {'product': product}
     return render(request, 'app/product_detail.html', context)
 
+@login_required
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
