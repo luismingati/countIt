@@ -28,6 +28,8 @@ section .container{
     padding: 50px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     align-self: center;
+    background-color: #F67D1A;
+    color: white;
 }
 section .container .title {
     font-size: 32px;
@@ -65,14 +67,13 @@ section .container form p input:focus {
 
 section .container form .button {
   align-self: center;
-  
-  background-color: #F67D1A;
+  background-color: white;
   padding: 12px 20px;
   border: 1px solid #F67D1A;
   border-radius: 10px;
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: #F67D1A;
   width: 120px;
 }
