@@ -1,11 +1,10 @@
 from django.shortcuts import redirect
-from django.contrib.auth import login
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
 from .models import Product
 from .forms import ProductForm
+from django.contrib.auth import login
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 def home(request):
@@ -67,7 +66,7 @@ def create_product(request):
     else:
         form = ProductForm()
     return render(request, 'app/product_form.html', {'form': form})
-
+    
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
