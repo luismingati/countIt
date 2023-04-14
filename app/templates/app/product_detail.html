@@ -16,7 +16,7 @@
             <p class="price">Preço: R${{product.price}}</p>
             <div class="buttons">
                 <button class="delete">Deletar</button>
-                <a class="edit" href="{%url 'product-update' product.id%}">Editar</a>
+                <a class="edit" href="{% url 'product-update' product.id %}">Editar</a>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <div class="product_delete">
             <p class="frase_delete">Você tem certeza que deseja apagar o produto "{{product}}"?<br>Esta ação não pode ser desfeita.</p>
             <div class="buttons">
-                <a href="{% url 'product' product.id%}">Voltar</a>
+                <a href="{% url 'product' product.id %}">Voltar</a>
                 <form method="post" action="{% url 'product-delete' product.id %}">
                     {% csrf_token %}
                     <button type="submit" >Deletar</button>

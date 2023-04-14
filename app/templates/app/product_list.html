@@ -1,8 +1,10 @@
 {% extends 'app/base.html' %}
 {% block content %}
 
-<link rel="stylesheet" href="/static/css/reset.css">
-<link rel="stylesheet" href="/static/css/list_style.css">
+{% block css %}
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/list_style.css">
+{% endblock css %}
 
 <div class="left-content">
     <table class="content-table">
@@ -22,7 +24,6 @@
                 <td>R${{product.price}}</td>
                 <td>
                     <a class= "look" href="{% url 'product' product.id %}">Ver</a>
-                    <a class= "edit" href="{% url 'product-update' product.id %}">Editar</a>
                 </td> 
             </tr>
         </tbody>
@@ -30,6 +31,9 @@
     </table>
 </div>
 <div class="right-content">
+    {% if not products %}
+        <h2 class="no-products">Nenhum produto cadastrado</h2>
+    {% endif %}
     <a href="{% url 'product-create' %}">Cadastrar Produto</a>
 </div>
 {% endblock content %}

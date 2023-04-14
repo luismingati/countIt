@@ -45,12 +45,7 @@
 
 @media only screen and (max-width:768px){
     .navbar{
-        background-color: #f67d1a;
         padding: 10px 24px;
-    }
-    .logo{
-        width: 100px;
-        height: 22px;
     }
     .login,.register{
         padding: 10px;
