@@ -1,0 +1,118 @@
+.navbar{
+    background-color: #F67D1A;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+    height: 70px;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    height: 70vw;
+}
+
+.login,.register{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login{
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 25px;
+    color: white;
+}
+.login:hover {
+    border: 2px solid black;
+    color: black;
+}
+.register{
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: white;
+    color: #F67D1A;
+    text-align: center;
+}
+.register:hover {
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+}
+
+@media only screen and (max-width:768px){
+    .navbar{
+        background-color: #f67d1a;
+        padding: 10px 24px;
+    }
+    .logo{
+        width: 100px;
+        height: 22px;
+    }
+    .login,.register{
+        padding: 10px;
+    }
+    .links{
+        gap: 10px;
+    }
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    height: calc(100vh - 102px);
+    background-color: whitesmoke;
+
+}
+.hero .left {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.hero .left .title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 36px;
+}
+.hero .left .text {
+    font-size: 24px;
+    margin-bottom: 36px;
+    width: 90%;
+}
+.hero .image {
+    width: 50%;
+}
+.hero .left .register{
+    background-color: #F67D1A;
+    color: white;
+    box-sizing: border-box;
+    width: 150px;
+    border: 2px solid #F67D1A;
+}
+.hero .left .register:hover{
+    background-color: transparent;
+    color: #F67D1A;
+    border: 2px solid #F67D1A;
+}
+
+@media only screen and (max-width:768px){
+    .hero {
+        flex-direction: column-reverse;
+        height: 100%;
+        padding: 26px 26px;
+        margin-top: 0;
+    }
+    .hero .left {
+        margin-top: 42px;
+        width: 100%;
+        align-items: center;
+    }
+    .hero .image {
+        width: 100%;
+        margin-top: 36px;
+    }
+}

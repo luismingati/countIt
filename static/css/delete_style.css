@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.product_delete{
+    background-color: #f67d1a;
+    padding: 20px;
+    border: rgb(215, 107, 18) 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    width: 500px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 21px;
+    font-family: roboto;
+    color: white;
+    font-weight: bold;
+}
+
+.product_delete p{
+    margin-bottom: 20px ;
+}
+
+.product_delete button{
+    height: 40px;
+    width: 80px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.product_delete a{
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    margin-right: 20px;
+}
