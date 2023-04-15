@@ -74,8 +74,10 @@ def product_update(request, pk):
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
-            form.save()
-            return redirect('product', pk=pk)
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return redirect('products')
     else:
         form = ProductForm(instance=product)
     return render(request, 'app/product_form.html', {'form': form})

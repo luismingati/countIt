@@ -12,19 +12,12 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Check if the instance being saved is an existing product
-        if self.pk:
-            return super().save(*args, **kwargs)
-        
-        # If it's a new product, check if a product with the same name and user exists
-        existing_product = Product.objects.filter(user=self.user, name=self.name).first()
-        if existing_product:
-            # If a product with the same name and user exists, update that product instead of creating a new one
-            existing_product.quantity = self.quantity
-            existing_product.price = self.price
-            existing_product.save()
-            return existing_product
-        
-        # If no product with the same name and user exists, save the new product
+        if not self.pk:
+            existing_product = Product.objects.filter(user=self.user, name=self.name).first()
+            if existing_product:
+                existing_product.quantity = self.quantity
+                existing_product.price = self.price
+                existing_product.save()
+                return existing_product
         return super().save(*args, **kwargs)
     

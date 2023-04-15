@@ -11,6 +11,6 @@ urlpatterns=[
     path('estoque/', product_list, name= 'products'),
     path('estoque/<int:pk>/', product_detail, name='product'),
     path('estoque/cadastro/', create_product, name='product-create'),
-    path('estoque/editar/<int:pk>/', product_update, name='product-update'),
-    path('estoque/deletar/<int:pk>/', product_delete, name='product-delete'),
+    path('estoque/<int:pk>/editar/', product_update, name='product-update'),
+    path('estoque/<int:pk>/deletar/', product_delete, name='product-delete'),
 ]
