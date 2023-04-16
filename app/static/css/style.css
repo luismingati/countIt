@@ -116,3 +116,26 @@ header .navbar .links .register:hover {
         margin-top: 36px;
     }
 }
+
+
+#footer{
+    width: 100%;
+    color: black;
+}
+#footer_content{
+    background-color: #F67D1A;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding: 3rem 3.5rem;
+}
+#footer_contacts{
+    margin-bottom: 0.75rem;
+}
+#footer_social_media{
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+#footer_social_media .footer-link{
+
+}
