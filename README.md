@@ -30,9 +30,9 @@ Figma: https://www.figma.com/file/L4wsHpCyzswN1dpXPZfnpe/Prancha-Principal?node-
 
 Protótipo Navegável Figma: https://www.figma.com/proto/L4wsHpCyzswN1dpXPZfnpe/Prancha-Principal?node-id=5-20&scaling=scale-down&page-id=0%3A1&starting-point-node-id=5%3A20
 
-Diagrama de Atividades:
+Diagrama de Atividades: https://drive.google.com/drive/folders/1G1dfJXF6Zx9hdQCyEuQXo-l9lDxswwAo?usp=share_link
 
-Deploy:
+Deploy: http://countit-deploy-env.eba-4s4jajv2.sa-east-1.elasticbeanstalk.com/
 
 # Experiência de Programação em Pares:
 https://drive.google.com/file/d/1uro-NzbUQauQ-HGOdpUsdcTfkHmJ3ucW/view?usp=share_link 
