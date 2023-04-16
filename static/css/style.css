@@ -1,4 +1,4 @@
-.navbar{
+header .navbar{
     background-color: #F67D1A;
     display: flex;
     align-items: center;
@@ -7,29 +7,29 @@
     height: 70px;
 }
 
-.links{
+header .navbar .links{
     display: flex;
     align-items: center;
     gap: 40px;
-    height: 70vw;
 }
 
-.login,.register{
+header .navbar .links .login,
+header .navbar .links .register{
     text-decoration: none;
     font-weight: bold;
 }
 
-.login{
+header .navbar .links .login{
     border: 2px solid white;
     padding: 15px;
     border-radius: 25px;
     color: white;
 }
-.login:hover {
+header .navbar .links .login:hover {
     border: 2px solid black;
     color: black;
 }
-.register{
+header .navbar .links .register{
     border: 2px solid white;
     padding: 15px;
     border-radius: 25px;
@@ -37,20 +37,21 @@
     color: #F67D1A;
     text-align: center;
 }
-.register:hover {
+header .navbar .links .register:hover {
     border: 2px solid black;
     background-color: black;
     color: white;
 }
 
 @media only screen and (max-width:768px){
-    .navbar{
+    header .navbar{
         padding: 10px 24px;
     }
-    .login,.register{
+    header .navbar .links .login,
+    header .navbar .links .register{
         padding: 10px;
     }
-    .links{
+    header .navbar .links{
         gap: 10px;
     }
 }
@@ -59,7 +60,7 @@
     display: flex;
     align-items: center;
     padding: 0 80px;
-    height: calc(100vh - 102px);
+    height: calc(100vh - 70px);
     background-color: whitesmoke;
 
 }
@@ -81,14 +82,18 @@
 .hero .image {
     width: 50%;
 }
-.hero .left .register{
+.hero .left .cta{
     background-color: #F67D1A;
     color: white;
     box-sizing: border-box;
-    width: 150px;
+    padding: 15px;
+    width: 230px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
     border: 2px solid #F67D1A;
 }
-.hero .left .register:hover{
+.hero .left .cta:hover{
     background-color: transparent;
     color: #F67D1A;
     border: 2px solid #F67D1A;
