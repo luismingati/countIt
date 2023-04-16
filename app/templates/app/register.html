@@ -1,10 +1,20 @@
-<h1>Cadastro</h1>
+{% extends 'app/index.html' %}
 
-<form method='POST'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <a href="{% url 'home' %}">Voltar</a>
-    <button type='submit'>
-        Cadastrar
-    </button>
-</form>
+{% block homecontent %}
+<section class="registration">
+    <div class="register-user">
+        <img src="/static/images/illustration.png" alt="">
+        <div class="register-container">
+            <h1 class="title">Fazer Cadastro</h1>
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="button" type='submit'>
+                    Cadastrar
+                </button>
+            </form>
+            <p class="already-login">Já possui registro?<a href="{% url 'login' %}" class="link">Fazer login</a></p>
+        </div>
+    </div>
+</section>
+{% endblock homecontent %}

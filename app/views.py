@@ -8,6 +8,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('products')
+        
     context = {'home': True}
     return render(request, 'app/index.html', context)
 

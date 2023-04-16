@@ -1,30 +1,19 @@
-nav{
-    height: 50px;
-    width: 100%;
-    border: 2px;
-    border-color: #cccccc;
-    border-style: solid;
-    display: flex;
-    align-items: center;
-    padding-left: 40px;
-    position: fixed;
-}
 .main-login{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 70px);
 }
 
-.container {
+.main-login .container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.login {
+.main-login .container .login {
     background-color: #ECEFF1;
-    width: 600px;
+    width: 750px;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -33,7 +22,7 @@ nav{
     box-shadow: rgba(50, 50, 90, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-.illustration {
+.main-login .container .login .illustration {
     width: 100%;
     height: auto;
     background-color: #cccccc;
@@ -41,11 +30,11 @@ nav{
     padding: 1em;
 }
 
-.illustration img {
+.main-login .container .login .illustration img {
     width: 100%;
 }
 
-form {
+.main-login .container .login .form-login form {
     width: 100%;
     display: flex;
     gap: 15px;
@@ -53,23 +42,24 @@ form {
     justify-content: center;
 }
 
-form p{
+.main-login .container .login .form-login form p{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
 }
-form p label{
+.main-login .container .login .form-login form p label{
+    color: black;
     padding-left: 5px;
 }
-form p input{
+.main-login .container .login .form-login form p input{
     width: 95%;
     height: 35px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.form-login {
+.main-login .container .login .form-login {
     width: 100%;
     height: 230px;
     display: flex;
@@ -79,7 +69,7 @@ form p input{
     padding: 0 10px;
 }
 
-.form-login strong {
+.main-login .container .login .form-login strong {
     width: 100%;
     text-align: center;
     color: #FF6600;
@@ -87,16 +77,17 @@ form p input{
     font-size: 140%;
     font-weight: bold;
 }
-.new-user{
-    font-size: 10px;
+.main-login .container .login .form-login .new-user{
+    font-size: 16px;
     margin-top: 5px;
+    color: black;
 }
-.new-user a{
+.main-login .container .login .form-login .new-user a{
     text-decoration: none;
     color: #FF6600;
 }
 
-.btn-login{
+.main-login .container .login .form-login .btn-login{
     width: 200px;
     height: 40px;
     border: none;
@@ -107,8 +98,12 @@ form p input{
     font-size: 1em;
     align-self: center;
 }
-.btn-login:hover{
+.main-login .container .login .form-login .btn-login:hover{
     transition: all ease .5s;
     cursor: pointer;
     background-color: #FF5200;
+}
+
+@media screen and (max-width: 768px) {
+
 }
