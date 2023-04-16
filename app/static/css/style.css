@@ -122,10 +122,16 @@ header .navbar .links .register:hover {
     width: 100%;
     color: black;
 }
+
+.footer-link{
+    text-decoration: none;
+}
+
+
 #footer_content{
     background-color: #F67D1A;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 3rem 3.5rem;
 }
 #footer_contacts{
@@ -137,5 +143,56 @@ header .navbar .links .register:hover {
     margin-top: 1.5rem;
 }
 #footer_social_media .footer-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: #F67D1A;
+    transition: all 0.4s;
+}
 
+#footer_social_media .footer-link i{
+    font-size: 1.25rem;
+}
+
+#footer_social_media .footer-link:hover{
+    opacity: 0.8;
+}
+
+#instagram{
+    background: linear-gradient(#7f37c9, #ff2992, #ff9807)
+    border-box;
+    border-radius: 80%;
+}
+
+#facebook{
+    background: #4267b3;
+}
+
+#slack{
+    background: #4C154D;
+}
+
+.footer-list{
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+}
+
+.footer-list .footer-link{
+    color: rgb(85, 85, 84);
+    transition: all 0.4s;
+    color: #7f37c9;
+}
+
+#footer_subscribe{
+    display:flex;
+    flex-direction: column;
+    gap:1.5rem;
+}
+
+#footer_subscribe{
+    
 }

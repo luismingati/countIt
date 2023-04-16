@@ -35,23 +35,24 @@
     {% endblock homecontent %}
 
     <footer>
-        <div id="footer_content" style="display:block; width:100px">
+        <div id="footer_content" style="display:block;">
             <div id= "footer_contacts">
-                <h1>Logo</h1>
+                <a href="{% url 'home' %}"><img class="logo" src="/static/images/logo.png" alt="Logo countIT" style="width: 156px;"></a>
                 <p>CountIT: o seu aliado para o sucesso do seu negócio</p>
 
                 <div id= "footer_social_media">
                     <a href="#" class="footer_link", id="instagram">
-                        <i class="fa-brands fa-instagram" style="color: black;"></i>
+                        <i class="fa-brands fa-instagram" style="color: white;"></i>
                     </a>
 
                     <a href="#" class="footer_link", id="facebook">
-                        <i class="fa-brands fa-facebook-f" style="color: black;"></i>
+                        <i class="fa-brands fa-facebook-f" style="color: white;"></i>
                     </a>
 
                     <a href="#" class="footer_link", id="slack">
-                        <i class="fa-brands fa-slack" style="color: black;"></i>
+                        <i class="fa-brands fa-slack" style="color: white;"></i>
                     </a>
+                </div>
             </div>
             <ul class="footer-list">
                 <li>
