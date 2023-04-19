@@ -76,6 +76,7 @@ header .navbar .links .register:hover {
 }
 .hero .left .text {
     font-size: 24px;
+    color: #252525;
     margin-bottom: 36px;
     width: 90%;
 }
@@ -86,6 +87,7 @@ header .navbar .links .register:hover {
     background-color: #F67D1A;
     color: white;
     box-sizing: border-box;
+    text-align: center;
     padding: 15px;
     width: 230px;
     border-radius: 20px;
