@@ -73,7 +73,6 @@ def create_product(request):
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
-
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
