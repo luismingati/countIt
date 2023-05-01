@@ -20,4 +20,19 @@ class Product(models.Model):
                 existing_product.save()
                 return existing_product
         return super().save(*args, **kwargs)
-    
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Product, through='CartItem')
+
+    def __str__(self):
+        return f'Carrinho de {self.user.username}'
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+
+    def __str__(self):
+        return f'{self.product.name} - {self.quantity}'

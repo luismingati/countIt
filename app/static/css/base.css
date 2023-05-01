@@ -13,10 +13,7 @@ header .navbar .links {
   align-items: center;
   gap: 40px;
 }
-header .navbar .links .vendas{
-  color: #EEA16F;
-  cursor: default;
-}
+
 header .navbar .links a{
   text-decoration: none;
   font-weight: bold;

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
-from .models import Product
+from .models import Product, Cart, CartItem
 from .forms import ProductForm
+import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -25,6 +26,8 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                if not hasattr(user, 'cart'):
+                    Cart.objects.create(user=user)
                 return redirect('products')
     else:
         form = AuthenticationForm()
@@ -38,6 +41,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Cart.objects.create(user=user) 
             login(request, user)
             return redirect('products')
     else:
@@ -93,3 +97,28 @@ def product_delete(request, pk):
         return redirect('products')
 
     return render(request, 'app/product_delete.html', {'product': product})
+
+@login_required
+def cart_view(request):
+    products = Product.objects.filter(user=request.user)
+    context = {'products': products}
+    return render(request, 'app/cart.html', context)
+
+@login_required
+def complete_sale(request):
+    if request.method == 'POST':
+        cart_items_json = request.POST.get('cart_items')
+        cart_items_data = json.loads(cart_items_json)
+
+        for product_id, item_data in cart_items_data.items():
+            product = get_object_or_404(Product, pk=product_id, user=request.user)
+            quantity = int(item_data['quantity'])
+
+            if product.quantity < quantity:
+                return redirect('cart')
+
+            product.quantity -= quantity
+            product.save()
+
+        return redirect('cart')
+
