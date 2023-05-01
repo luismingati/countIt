@@ -100,7 +100,7 @@ def product_delete(request, pk):
 
 @login_required
 def cart_view(request):
-    products = Product.objects.filter(user=request.user)
+    products = Product.objects.filter(user=request.user).order_by('-quantity')
     context = {'products': products}
     return render(request, 'app/cart.html', context)
 
