@@ -53,6 +53,10 @@ def register(request):
 def product_list(request):
     products = Product.objects.filter(user=request.user)
     context = {'products': products}
+    
+    search_input = request.GET.get('search-area') or ''
+    if search_input:
+        context['products'] = context['products'].filter(name__icontains=search_input)
     return render(request, 'app/product_list.html', context)
 
 @login_required
