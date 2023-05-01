@@ -106,6 +106,11 @@ def product_delete(request, pk):
 def cart_view(request):
     products = Product.objects.filter(user=request.user).order_by('-quantity')
     context = {'products': products}
+
+    search_input = request.GET.get('search-area') or ''
+    if search_input:
+        context['products'] = context['products'].filter(name__icontains=search_input)
+        
     return render(request, 'app/cart.html', context)
 
 @login_required
