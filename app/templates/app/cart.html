@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="GET" class="search-content">
+<form id="search-form" method="GET" class="search-content">
     <input type="text" name="search-area" class="search-field">
     <input type="submit" value="Procurar" class="search-btn">
 </form>
@@ -112,6 +112,42 @@
     }
 
     document.getElementById('cart-form').addEventListener('submit', onSubmit);
+
+    //functions not to reload the page
+    function submitSearch(e) {
+    e.preventDefault();
+    const searchField = document.querySelector('.search-field');
+    const searchTerm = searchField.value.trim();
+
+    fetch(`/search/?q=${searchTerm}`)
+        .then(response => response.json())
+        .then(data => {
+            updateProductList(data.products);
+        });
+    }
+
+    document.getElementById('search-form').addEventListener('submit', submitSearch);
+
+    function updateProductList(products) {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    products.forEach(product => {
+        const li = document.createElement('li');
+        li.innerHTML = `${product.name} - R$ ${product.price} - Quantidade disponível: ${product.quantity}`;
+        
+        const button = document.createElement('button');
+        button.classList.add('add-to-cart-btn');
+        button.dataset.productId = product.id;
+        button.dataset.productName = product.name;
+        button.innerText = 'Adicionar';
+        button.onclick = addToCart;
+        
+        li.appendChild(button);
+        productList.appendChild(li);
+    });
+}
+
 </script>
 {% endblock %}
 

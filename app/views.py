@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
-from .models import Product, Cart, CartItem
+from .models import Product, Cart
 from .forms import ProductForm
+from django.http import JsonResponse
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
@@ -131,3 +132,9 @@ def complete_sale(request):
 
         return redirect('cart')
 
+@login_required
+def search(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(user=request.user, name__icontains=query).order_by('-quantity')
+    product_data = [{'id': product.id, 'name': product.name, 'price': product.price, 'quantity': product.quantity} for product in products]
+    return JsonResponse({'products': product_data})
