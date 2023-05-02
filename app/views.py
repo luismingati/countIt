@@ -119,18 +119,34 @@ def complete_sale(request):
     if request.method == 'POST':
         cart_items_json = request.POST.get('cart_items')
         cart_items_data = json.loads(cart_items_json)
+        sale_items = []
+        total_sale = 0
+
+        if not cart_items_data:
+            return redirect('cart')
 
         for product_id, item_data in cart_items_data.items():
             product = get_object_or_404(Product, pk=product_id, user=request.user)
             quantity = int(item_data['quantity'])
-
             if product.quantity < quantity:
                 return redirect('cart')
-
             product.quantity -= quantity
             product.save()
 
-        return redirect('cart')
+            total_item = product.price * quantity
+            sale_item = {
+                'name': product.name,
+                'price': product.price,
+                'quantity': quantity,
+                'total': total_item
+            }
+            sale_items.append(sale_item)
+            total_sale += total_item
+
+        context = {'sale_items': sale_items, 'total_sale': total_sale}
+        return render(request, 'app/sale_completed.html', context)
+
+    return redirect('cart')
 
 @login_required
 def search(request):

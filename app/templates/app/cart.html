@@ -24,13 +24,7 @@
         <div class="col-md-6">
             <h2>Carrinho</h2>
             <table id="cart-table" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
+
                 <tbody>
                     
                 </tbody>
@@ -129,22 +123,22 @@
     document.getElementById('search-form').addEventListener('submit', submitSearch);
 
     function updateProductList(products) {
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = '';
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
 
-    products.forEach(product => {
-        const li = document.createElement('li');
-        li.innerHTML = `${product.name} - R$ ${product.price} - Quantidade disponível: ${product.quantity}`;
-        
-        const button = document.createElement('button');
-        button.classList.add('add-to-cart-btn');
-        button.dataset.productId = product.id;
-        button.dataset.productName = product.name;
-        button.innerText = 'Adicionar';
-        button.onclick = addToCart;
-        
-        li.appendChild(button);
-        productList.appendChild(li);
+        products.forEach(product => {
+            const li = document.createElement('li');
+            li.innerHTML = `${product.name} - R$ ${product.price} - Quantidade disponível: ${product.quantity}`;
+            
+            const button = document.createElement('button');
+            button.classList.add('add-to-cart-btn');
+            button.dataset.productId = product.id;
+            button.dataset.productName = product.name;
+            button.innerText = 'Adicionar';
+            button.onclick = addToCart;
+            
+            li.appendChild(button);
+            productList.appendChild(li);
     });
 }
 
