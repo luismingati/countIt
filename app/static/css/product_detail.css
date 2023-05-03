@@ -54,10 +54,15 @@ section .container .product-detail .quantity {
   color: white;
 }
 
+section .container .product-detail .min-quantity {
+  font-size: 24px;
+  margin-bottom: 48px;
+  color: darkblue;
+}
+
 section .container .product-detail .price {
   font-size: 22px;
   margin-bottom: 24px;
-  margin-bottom: 48px;
   color: white;
 }
 

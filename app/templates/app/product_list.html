@@ -7,9 +7,12 @@
 {% endblock css %}
 
 <form method="GET" class="search-content">
-    <input type="text" name="search-area" class="search-field">
+    <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
     <input type="submit" value="Procurar" class="search-btn">
 </form>
+
+<button id="toggle-low-stock-btn">estoque baixo</button>
+
 <div class="left-content">
     <table class="content-table">
         <thead>
@@ -40,4 +43,14 @@
     {% endif %}
     <a href="{% url 'product-create' %}">Cadastrar Produto</a>
 </div>
+
+<script>
+    const toggleLowStockBtn = document.getElementById('toggle-low-stock-btn');
+    toggleLowStockBtn.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const showLowStock = urlParams.get('show_low_stock') !== 'true';
+        urlParams.set('show_low_stock', showLowStock ? 'true' : 'false');
+        window.location.search = urlParams.toString();
+    });
+</script>
 {% endblock content %}

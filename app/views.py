@@ -1,6 +1,8 @@
 from django.shortcuts import redirect
-from .models import Product, Cart, CartItem
+from .models import Product, Cart
 from .forms import ProductForm
+from django.http import JsonResponse
+from json import JSONDecodeError
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
@@ -51,12 +53,32 @@ def register(request):
 
 @login_required
 def product_list(request):
+    show_low_stock = request.GET.get('show_low_stock') == 'true'
+
     products = Product.objects.filter(user=request.user)
     context = {'products': products}
     
     search_input = request.GET.get('search-area') or ''
     if search_input:
         context['products'] = context['products'].filter(name__icontains=search_input)
+
+    if show_low_stock:
+        low_stock_products = []
+        for product in products:
+            if product.quantity <= product.min_quantity:
+                low_stock_products.append(product)
+        products = low_stock_products
+        context = {'products': products}
+
+   
+    if show_low_stock and search_input:
+        low_stock_products = []
+        for product in products:
+            if product.quantity <= product.min_quantity:
+                low_stock_products.append(product)
+        products = low_stock_products
+        context = {'products': products}
+
     return render(request, 'app/product_list.html', context)
 
 @login_required
@@ -117,17 +139,48 @@ def cart_view(request):
 def complete_sale(request):
     if request.method == 'POST':
         cart_items_json = request.POST.get('cart_items')
-        cart_items_data = json.loads(cart_items_json)
+        
+        # Verifique se cart_items_json não está vazio
+        if not cart_items_json:
+            return redirect('cart')
+        
+        try:
+            cart_items_data = json.loads(cart_items_json)
+        except JSONDecodeError:
+            return redirect('cart')
+
+        sale_items = []
+        total_sale = 0
+
+        if not cart_items_data:
+            return redirect('cart')
 
         for product_id, item_data in cart_items_data.items():
             product = get_object_or_404(Product, pk=product_id, user=request.user)
             quantity = int(item_data['quantity'])
-
             if product.quantity < quantity:
                 return redirect('cart')
-
             product.quantity -= quantity
             product.save()
 
-        return redirect('cart')
+            total_item = product.price * quantity
+            sale_item = {
+                'name': product.name,
+                'price': product.price,
+                'quantity': quantity,
+                'total': total_item
+            }
+            sale_items.append(sale_item)
+            total_sale += total_item
 
+        context = {'sale_items': sale_items, 'total_sale': total_sale}
+        return render(request, 'app/sale_completed.html', context)
+
+    return redirect('cart')
+
+@login_required
+def search(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(user=request.user, name__icontains=query).order_by('-quantity')
+    product_data = [{'id': product.id, 'name': product.name, 'price': product.price, 'quantity': product.quantity} for product in products]
+    return JsonResponse({'products': product_data})

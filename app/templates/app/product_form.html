@@ -1,11 +1,14 @@
 {% extends 'app/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/product_form.css">
+{% endblock css %}
+
 {% block content %}
 
-{% block css%}
-<link rel="stylesheet" href="/static/css/product_form.css">
-{% endblock css%}
 
 <section>
+<<<<<<< HEAD
   <a class="back" href="{% url 'products' %}">Voltar</a>
   <div class="container">
     <h1 class="title">Informações do Produto</h1>
@@ -15,5 +18,40 @@
         <button class="button" type="submit" id="delete">Enviar</button>
     </form>
   </div>
+=======
+    <a class="back" href="{% url 'products' %}">Voltar</a>
+    <div class="container">
+        <h1 class="title">Informações do Produto</h1>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.name.auto_id }}">Nome:</label>
+                {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.price.auto_id }}">Preço:</label>
+                {{ form.price }}
+                {{ form.price.errors }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.quantity.auto_id }}">Quantidade:</label>
+                {{ form.quantity }}
+                {{ form.quantity.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.min_quantity.auto_id }}">Quantidade Mínima:</label>
+                {{ form.min_quantity }}
+                {{ form.min_quantity.errors }}
+            </div>
+            
+            <button class="button" type="submit">Enviar</button>
+        </form>
+    </div>
+>>>>>>> origin/main
 </section>
 {% endblock content %}
