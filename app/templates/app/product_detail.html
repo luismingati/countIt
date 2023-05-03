@@ -11,7 +11,7 @@
     <div class="container">
     <a class="back" href="{% url 'products'%}">Voltar</a>
         <div class="product-detail">
-            <h1 class="title">{{product.name}}</h1>
+            <h1 class="title" id="product_name">{{product.name}}</h1>
             <p class="quantity">Quantidade: {{product.quantity}}</p>
             <p class="price">Preço: R${{product.price}}</p>
             <div class="buttons">
