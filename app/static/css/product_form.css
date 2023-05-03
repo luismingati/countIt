@@ -24,56 +24,58 @@ section .container{
     flex-direction: column;
     border: 1px solid lightgray;
     border-radius: 30px;
-    width: 30vw;
+    width: 25vw;
     padding: 50px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     align-self: center;
     background-color: #F67D1A;
     color: white;
 }
+
 section .container .title {
-    font-size: 32px;
-    font-weight: bold;
-    text-transform: capitalize;
-    margin-bottom: 24px;
-    align-self: center;
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-bottom: 20px;
 }
 section .container form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   width: 100%;
-  gap: 30px;
 }
-section .container form p {
+section .container form .form-group {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
-section .container form p label {
+
+section .container form .form-group label {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
-section .container form p input {
+
+section .container form .form-group input {
   padding: 10px;
   border: 1px solid lightgray;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 16px;
 }
-section .container form p input:focus {
+section .container form .form-group input:focus {
   outline: none;
-  border: 1px solid #F67D1A;
+  border: 1px solid black;
 }
 
 section .container form .button {
-  align-self: center;
+  cursor: pointer;
   background-color: white;
-  padding: 12px 20px;
-  border: 1px solid #F67D1A;
-  border-radius: 10px;
-  text-align: center;
+  padding: 15px;
+  border: 1px solid white;
+  border-radius: 15px;
+  color: black;
+
   font-size: 18px;
   font-weight: bold;
-  color: #F67D1A;
-  width: 120px;
+  text-decoration: none;
+  margin-top: 20px;
 }

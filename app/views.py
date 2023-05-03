@@ -52,12 +52,32 @@ def register(request):
 
 @login_required
 def product_list(request):
+    show_low_stock = request.GET.get('show_low_stock') == 'true'
+
     products = Product.objects.filter(user=request.user)
     context = {'products': products}
     
     search_input = request.GET.get('search-area') or ''
     if search_input:
         context['products'] = context['products'].filter(name__icontains=search_input)
+
+    if show_low_stock:
+        low_stock_products = []
+        for product in products:
+            if product.quantity <= product.min_quantity:
+                low_stock_products.append(product)
+        products = low_stock_products
+        context = {'products': products}
+
+   
+    if show_low_stock and search_input:
+        low_stock_products = []
+        for product in products:
+            if product.quantity <= product.min_quantity:
+                low_stock_products.append(product)
+        products = low_stock_products
+        context = {'products': products}
+
     return render(request, 'app/product_list.html', context)
 
 @login_required

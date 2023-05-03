@@ -1,19 +1,18 @@
 {% extends 'app/base.html' %}
-{% block content %}
-
 {% block css%}
 <link rel="stylesheet" href="/static/css/product_detail.css">
 <link rel="stylesheet" href="/static/css/delete_style.css">
-
 <script src="/static/javascript/modal.js" defer></script>
 {% endblock css%}
+{% block content %}
 <section>
     <div class="container">
-    <a class="back" href="{% url 'products'%}">Voltar</a>
+        <a class="back" href="{% url 'products'%}">Voltar</a>
         <div class="product-detail">
             <h1 class="title">{{product.name}}</h1>
             <p class="quantity">Quantidade: {{product.quantity}}</p>
             <p class="price">Preço: R${{product.price}}</p>
+            <p class="min-quantity">Quantidade mínima: {{ product.min_quantity }}</p>
             <div class="buttons">
                 <button class="delete">Deletar</button>
                 <a class="edit" href="{% url 'product-update' product.id %}">Editar</a>

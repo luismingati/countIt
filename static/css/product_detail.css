@@ -34,27 +34,36 @@ section .container .product-detail {
   flex-direction: column;
   padding: 50px;
   align-items: center;
-  border: 2px solid lightgray;
+  background-color: #F67D1A;
   border-radius: 30px;
   margin-top: 30px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  min-width: 450px;
 }
 section .container .product-detail .title {
   font-size: 32px;
   font-weight: bold;
+  color: white;
   text-transform: capitalize;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 section .container .product-detail .quantity {
-  font-size: 22px;
+  font-size: 24px;
   margin-bottom: 24px;
+  color: white;
+}
+
+section .container .product-detail .min-quantity {
+  font-size: 24px;
+  margin-bottom: 48px;
+  color: darkblue;
 }
 
 section .container .product-detail .price {
   font-size: 22px;
   margin-bottom: 24px;
-  margin-bottom: 48px;
+  color: white;
 }
 
 section .container .product-detail .buttons .delete {
@@ -80,7 +89,7 @@ section .container .product-detail .buttons .edit {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: black;
   text-decoration: none;
   width: 100px;
 }
