@@ -15,8 +15,7 @@
                 {% for product in products %}
                     <li>
                         {{ product.name }} - R$ {{ product.price }} - Quantidade disponível: {{ product.quantity }}
-                        <button class="add-to-cart-btn" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" onclick="addToCart(event)">Adicionar</button>
-
+                        <button class="add-to-cart-btn" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-quantity="{{ product.quantity }}" onclick="addToCart(event)">Adicionar</button>
                     </li>
                 {% endfor %}
             </ul>
@@ -46,17 +45,24 @@
         const button = event.target;
         const productId = button.dataset.productId;
         const productName = button.dataset.productName;
+        const productQuantity = parseInt(button.dataset.productQuantity);
 
         if (cart[productId]) {
-            cart[productId].quantity += 1;
+            if (cart[productId].quantity < productQuantity) {
+                cart[productId].quantity += 1;
+            } else {
+                alert('A quantidade solicitada excede a quantidade disponível no estoque.');
+                return;
+            }
         } else {
             cart[productId] = {
                 name: productName,
-                quantity: 1
+                quantity: 1,
+                maxQuantity: productQuantity
             };
         }
         updateCartTable();
-    }
+}
 
     function removeFromCart(productId) {
         delete cart[productId];
@@ -100,6 +106,12 @@
     }
 
     function onSubmit() {
+        for (const [productId, item] of Object.entries(cart)) {
+            if (item.quantity > item.maxQuantity) {
+                alert(`A quantidade solicitada de ${item.name} excede a quantidade disponível no estoque.`);
+                return false;
+            }
+        }
         const cartItemsField = document.getElementById('cart-items');
         cartItemsField.value = JSON.stringify(cart);
         return true;
@@ -109,16 +121,25 @@
 
     //functions not to reload the page
     function submitSearch(e) {
-    e.preventDefault();
-    const searchField = document.querySelector('.search-field');
-    const searchTerm = searchField.value.trim();
+        e.preventDefault();
+        const searchField = document.querySelector('.search-field');
+        const searchTerm = searchField.value.trim();
 
-    fetch(`/search/?q=${searchTerm}`)
-        .then(response => response.json())
+        fetch(`/search/?q=${searchTerm}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar produtos');
+            }
+            return response.json();
+        })
         .then(data => {
             updateProductList(data.products);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
         });
     }
+
 
     document.getElementById('search-form').addEventListener('submit', submitSearch);
 
@@ -134,13 +155,15 @@
             button.classList.add('add-to-cart-btn');
             button.dataset.productId = product.id;
             button.dataset.productName = product.name;
+            button.dataset.productQuantity = product.quantity; // Adicione esta linha
             button.innerText = 'Adicionar';
             button.onclick = addToCart;
             
             li.appendChild(button);
             productList.appendChild(li);
-    });
-}
+        });
+    }
+
 
 </script>
 {% endblock %}

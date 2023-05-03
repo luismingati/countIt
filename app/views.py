@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from .models import Product, Cart
 from .forms import ProductForm
 from django.http import JsonResponse
+from json import JSONDecodeError
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
@@ -138,7 +139,16 @@ def cart_view(request):
 def complete_sale(request):
     if request.method == 'POST':
         cart_items_json = request.POST.get('cart_items')
-        cart_items_data = json.loads(cart_items_json)
+        
+        # Verifique se cart_items_json não está vazio
+        if not cart_items_json:
+            return redirect('cart')
+        
+        try:
+            cart_items_data = json.loads(cart_items_json)
+        except JSONDecodeError:
+            return redirect('cart')
+
         sale_items = []
         total_sale = 0
 
