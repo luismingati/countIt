@@ -8,17 +8,6 @@
 
 
 <section>
-<<<<<<< HEAD
-  <a class="back" href="{% url 'products' %}">Voltar</a>
-  <div class="container">
-    <h1 class="title">Informações do Produto</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button class="button" type="submit" id="delete">Enviar</button>
-    </form>
-  </div>
-=======
     <a class="back" href="{% url 'products' %}">Voltar</a>
     <div class="container">
         <h1 class="title">Informações do Produto</h1>
@@ -52,6 +41,5 @@
             <button class="button" type="submit">Enviar</button>
         </form>
     </div>
->>>>>>> origin/main
 </section>
 {% endblock content %}

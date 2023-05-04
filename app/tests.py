@@ -16,34 +16,59 @@ class MySeleniumTests(LiveServerTestCase):
         super().tearDownClass()
 
     def test_search_product(self):
-        self.driver.get(self.live_server_url + "/estoque/")
+        self.driver.get(self.live_server_url + "/register/")
 
-        # Localiza o campo do formulário e insere um valor
+        #cadastrar usuario
         username = self.driver.find_element(By.XPATH, "//input[@name='username']")
         username.send_keys("kauan123@")
 
-        password = self.driver.find_element(By.XPATH, "//input[@name='password']")
+        password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
         password.send_keys("Graciebarra592@")
 
-        # Localiza o botão e clica nele
-        botao = self.driver.find_element(By.ID, "click_login")
+        password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
+        password2.send_keys("Graciebarra592@")
+
+        botao = self.driver.find_element(By.CLASS_NAME, "button")
         botao.click()
 
-        # Aguarda 2 segundos para que a página seja atualizada após o clique no botão
         sleep(2)
 
-        search = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
-        search.send_keys("Parafuso Sextavado")
+        #cadastrar produto
+        product_register = self.driver.find_element(By.ID, "product-register")
+        product_register.click()
 
-        search_button = self.driver.find_element(By.CLASS_NAME, "search-btn")
+        name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+        name.send_keys("Parafuso Sextavado")
+
+        price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+        price.send_keys("5")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+        name.send_keys("100")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+        name.send_keys("10")
+
+        search_button = self.driver.find_element(By.CLASS_NAME, "button")
         search_button.click()
 
-        sleep(5)
+        sleep(2)
 
+        #pesquisar produto
+        name = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
+        name.send_keys("Parafuso Sextavado")
+
+        search_button = self.driver.find_element(By.CLASS_NAME, "search-btn")
+        search_button.click()   
+
+        sleep(2)
+
+        # validação do teste
         try:
             tabela = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
             tabela.find_element(By.XPATH, f"//td[contains(text(), 'Parafuso Sextavado')]")
             assert True
+            print("Produto encontrado na tabela, validação realizada com sucesso.")
         except:
-            assert False, "Produto não encontrado na tabela"
+            assert False, "Produto não encontrado na tabela."
 
