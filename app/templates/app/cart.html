@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<form id="search-form" method="GET" class="search-content">
-    <input type="text" name="search-area" class="search-field">
-    <input type="submit" value="Procurar" class="search-btn">
+<form method="GET" class="search-content">
+    <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
+    <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
 
 <div class="container">
