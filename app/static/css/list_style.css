@@ -38,6 +38,7 @@
     border: 1px solid orange;
 }
 .search-btn{
+    cursor: pointer;
     background: none;
     border: none;
 }
