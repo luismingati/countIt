@@ -3,7 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium import webdriver
 from time import sleep
 
-class ep27_tests(LiveServerTestCase):
+
+class plataformTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -15,7 +16,8 @@ class ep27_tests(LiveServerTestCase):
         cls.driver.quit()
         super().tearDownClass()
 
-    def test_search_product(self):
+    #ep-27
+    def Ep27Tests(self):
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
@@ -83,54 +85,16 @@ class ep27_tests(LiveServerTestCase):
         try:
             tabela2 = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
             tabela2.find_element(By.XPATH, f"//td[contains(text(), 'Iphone 14')]")
-            assert False, "Validação 2 - O este encontrou um erro, o HTML retorna um produto que não existe"
+            assert False, "Validação 2 - O teste encontrou um erro, o HTML retorna um produto que não existe"
         except:
             assert True
             print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
-
-
-
-
-
-
-class ep5_tests(LiveServerTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.driver = webdriver.Chrome()
-        cls.driver.implicitly_wait(10)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
-        super().tearDownClass()
-
-    def estoqueMinimo(self):
-        ...
-
-
-
-
-
-
-
-
-class ep3_tests(LiveServerTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.driver = webdriver.Chrome()
-        cls.driver.implicitly_wait(10)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
-        super().tearDownClass()
-
-    def estoqueMinimo(self):
+    #ep-3
+    def Ep3Tests(self):
         self.driver.get(self.live_server_url + "/register/")
 
+        #cadastrar usuario
         username = self.driver.find_element(By.XPATH, "//input[@name='username']")
         username.send_keys("kauan123@")
 
@@ -190,3 +154,55 @@ class ep3_tests(LiveServerTestCase):
         #clicar em estoque minimo
         search_button = self.driver.find_element(By.ID, "toggle-low-stock-btn")
         search_button.click()
+
+        sleep(5)
+
+        # validação do teste - Verificar se o produto pesquisado, irá aparecer na pesquisa
+        try:
+            tabela = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
+            tabela.find_element(By.XPATH, f"//td[contains(text(), 'Parafuso Sextavado')]")
+            assert True
+            print(" Validação 1 - Produto aparece como estoque mínimo, teste validado")
+        except:
+            assert False, "Validação 1 - Produto não encontrado na tabela de estoque mínimo, há um erro."
+
+        #ep-5 Tests
+        def Ep5Tests(self):
+            self.driver.get(self.live_server_url + "/register/")
+
+            #cadastrar usuario
+            username = self.driver.find_element(By.XPATH, "//input[@name='username']")
+            username.send_keys("kauan123@")
+
+            password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
+            password.send_keys("Graciebarra592@")
+
+            password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
+            password2.send_keys("Graciebarra592@")
+
+            botao = self.driver.find_element(By.CLASS_NAME, "button")
+            botao.click()
+
+            sleep(2)
+
+            #cadastrar 5 produtos
+            for i in range(1,6):
+                product_register = self.driver.find_element(By.ID, "product-register")
+                product_register.click()
+
+                name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+                name.send_keys(f"Iphone 14 {i}")
+
+                price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+                price.send_keys("1000")
+
+                name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+                name.send_keys("10")
+
+                name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+                name.send_keys("1")
+
+                search_button = self.driver.find_element(By.CLASS_NAME, "button")
+                search_button.click()
+
+                sleep(1)
