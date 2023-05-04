@@ -88,3 +88,32 @@ class ep27_tests(LiveServerTestCase):
             assert True
             print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
+class ep5_tests(LiveServerTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.driver = webdriver.Chrome()
+        cls.driver.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+        super().tearDownClass()
+
+    def estoqueMinimo(self):
+        ...
+
+class ep3_tests(LiveServerTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.driver = webdriver.Chrome()
+        cls.driver.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+        super().tearDownClass()
+
+    def realizarVenda(self):
+        ...
