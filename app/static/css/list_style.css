@@ -30,10 +30,13 @@
 }
 .search-content{
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .search-field{
     padding: 5px 10px;
-    border: 1px solid lightslategray;
+    border: 1px solid lightgray;
     border-radius: 10px;
     font-size: 16px;
 }
@@ -45,8 +48,6 @@
     background: none;
     border: none;
     position: absolute;
-    top: 7px;
-    right: 4px;
 }
 .left-content{
     display: flex;

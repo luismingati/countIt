@@ -1,11 +1,92 @@
-.search-content-master{
+.page-description {
     display: flex;
-    justify-content: space-around;
-    padding: 0 25vw;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
 }
-.search-content-master h1{
+.page-description .title {
+    font-size: 42px;
+    font-weight: 700;
+}
+.search-content{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.search-field{
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-size: 16px;
+}
+.search-field:focus{
+    border: 1px solid orange;
+}
+.search-btn{
+    cursor: pointer;
+    background: none;
+    border: none;
+    position: absolute;
+}
+.cart-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    
+}
+.cart-container .products {
+    width: 40vw;
+}
+.cart-container .products h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.cart-container .products .product-list li{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 18px 10px;
+    border-bottom: 1px solid black;
+    gap: 30px;
+}
+
+.cart-container .products .product-list li:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+.cart-container .products .product-list li p:first-child{
     font-size: 20px;
     font-weight: bold;
-    color: #404040;
+    text-transform: capitalize;
+}
+
+.cart-container .products .product-list .add-to-cart-btn {
+    background-color: rgb(47, 255, 92);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: black;
+}
+
+.cart-container .products .product-list .add-to-cart-btn:hover {
+    background-color:  rgb(47, 255, 141);
+}
+
+.cart-container .cart {
+    width: 60vw;
+    background-color: beige;
+}
+
+.cart-container .cart h2{
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
 }
