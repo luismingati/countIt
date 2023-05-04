@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium import webdriver
 from time import sleep
 
-class MySeleniumTests(LiveServerTestCase):
+class ep27_tests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -63,12 +63,28 @@ class MySeleniumTests(LiveServerTestCase):
 
         sleep(2)
 
-        # validação do teste
+        # validação do teste - Verificar se o produto pesquisado, irá aparecer na pesquisa
         try:
             tabela = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
             tabela.find_element(By.XPATH, f"//td[contains(text(), 'Parafuso Sextavado')]")
             assert True
-            print("Produto encontrado na tabela, validação realizada com sucesso.")
+            print(" Validação 1 - Produto encontrado na tabela, validação realizada com sucesso.")
         except:
-            assert False, "Produto não encontrado na tabela."
+            assert False, "Validação 1 - Produto não encontrado na tabela."
+
+        #teste para verificar se irá aparecer um produto que não existe
+        product_error = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
+        product_error.send_keys("Iphone 14")
+
+        search_button = self.driver.find_element(By.CLASS_NAME, "search-btn")
+        search_button.click()   
+
+        #resultado da segunda validação
+        try:
+            tabela2 = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
+            tabela2.find_element(By.XPATH, f"//td[contains(text(), 'Iphone 14')]")
+            assert False, "Validação 2 - O este encontrou um erro, o HTML retorna um produto que não existe"
+        except:
+            assert True
+            print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
