@@ -88,6 +88,12 @@ class ep27_tests(LiveServerTestCase):
             assert True
             print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
+
+
+
+
+
+
 class ep5_tests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
@@ -103,6 +109,13 @@ class ep5_tests(LiveServerTestCase):
     def estoqueMinimo(self):
         ...
 
+
+
+
+
+
+
+
 class ep3_tests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
@@ -115,5 +128,65 @@ class ep3_tests(LiveServerTestCase):
         cls.driver.quit()
         super().tearDownClass()
 
-    def realizarVenda(self):
-        ...
+    def estoqueMinimo(self):
+        self.driver.get(self.live_server_url + "/register/")
+
+        username = self.driver.find_element(By.XPATH, "//input[@name='username']")
+        username.send_keys("kauan123@")
+
+        password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
+        password.send_keys("Graciebarra592@")
+
+        password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
+        password2.send_keys("Graciebarra592@")
+
+        botao = self.driver.find_element(By.CLASS_NAME, "button")
+        botao.click()
+
+        sleep(2)
+
+        #cadastrar produto com a quantidade minima igual a quantidade
+        product_register = self.driver.find_element(By.ID, "product-register")
+        product_register.click()
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+        name.send_keys("Parafuso Sextavado")
+
+        price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+        price.send_keys("5")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+        name.send_keys("10")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+        name.send_keys("10")
+
+        search_button = self.driver.find_element(By.CLASS_NAME, "button")
+        search_button.click()
+
+        sleep(2)
+
+        #cadastrar produto com a quantidade superior a quantidade mínima
+        product_register = self.driver.find_element(By.ID, "product-register")
+        product_register.click()
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+        name.send_keys("Iphone 14")
+
+        price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+        price.send_keys("1000")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+        name.send_keys("10")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+        name.send_keys("1")
+
+        search_button = self.driver.find_element(By.CLASS_NAME, "button")
+        search_button.click()
+
+        sleep(2)
+
+        #clicar em estoque minimo
+        search_button = self.driver.find_element(By.ID, "toggle-low-stock-btn")
+        search_button.click()
