@@ -4,15 +4,19 @@
 {% block css %}
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/list_style.css">
+    <script src="https://kit.fontawesome.com/f83d7a8359.js" crossorigin="anonymous"></script>
 {% endblock css %}
 
-<form method="GET" class="search-content">
-    <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
-    <input type="submit" value="Procurar" class="search-btn">
-</form>
+<div class="search-content-master">
+    <h1>Estoque</h1>
 
-<button id="toggle-low-stock-btn">estoque baixo</button>
+    <form method="GET" class="search-content">
+        <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
+        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
 
+    <button id="toggle-low-stock-btn">Estoque baixo</button>
+</div>
 <div class="left-content">
     <table class="content-table">
         <thead>
