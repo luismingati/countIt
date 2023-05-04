@@ -28,6 +28,9 @@
     background-color: #F67D1A;
     font-size: 14px;
 }
+.search-content{
+    position: relative;
+}
 .search-field{
     padding: 5px 10px;
     border: 1px solid lightslategray;
@@ -41,6 +44,9 @@
     cursor: pointer;
     background: none;
     border: none;
+    position: absolute;
+    top: 7px;
+    right: 4px;
 }
 .left-content{
     display: flex;

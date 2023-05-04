@@ -1,11 +1,16 @@
 {% extends "app/base.html" %}
-
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/cart.css">
+    <script src="https://kit.fontawesome.com/f83d7a8359.js" crossorigin="anonymous"></script>
 {% block content %}
 
-<form method="GET" class="search-content">
-    <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
-    <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-</form>
+<div class="search-content-master">
+    <h1>Vendas</h1>
+    <form method="GET" class="search-content">
+        <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
+        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+</div>
 
 <div class="container">
     <div class="row">
