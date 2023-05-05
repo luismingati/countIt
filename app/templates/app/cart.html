@@ -6,12 +6,12 @@
 {% endblock css %}
 
 {% block content %}
-<div class="page-description">
-    <div class="title">Vendas</div>
-    <form method="GET" class="search-content">
+<div class="page-description"> 
+    <form id="search-form" method="GET" class="search-content">
         <input type="text" name="search-area" class="search-field" value="{{ request.GET.search_area }}">
         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
+    <div class="title">Vendas</div>
 </div>
 <div class="cart-container">
     <div class="products">
@@ -127,7 +127,7 @@
         const searchField = document.querySelector('.search-field');
         const searchTerm = searchField.value.trim();
 
-        fetch(`/search/?q=${searchTerm}`)
+        fetch(`/search?q=${searchTerm}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao buscar produtos');
@@ -143,7 +143,7 @@
     }
 
 
-    document.getElementById('search-form').addEventListener('submit', submitSearch);
+    document.getElementById('search-form').addEventListener('submit', (e) => submitSearch(e));
 
     function updateProductList(products) {
         const productList = document.getElementById('product-list');
@@ -151,7 +151,7 @@
 
         products.forEach(product => {
             const li = document.createElement('li');
-            li.innerHTML = `${product.name} - R$ ${product.price} - Quantidade disponível: ${product.quantity}`;
+            li.innerHTML = `<p>${product.name}</p> <p>R$${product.price}</p> <p>Quantidade disponível: ${product.quantity}</p>`;
             
             const button = document.createElement('button');
             button.classList.add('add-to-cart-btn');
@@ -165,7 +165,6 @@
             productList.appendChild(li);
         });
     }
-
 
 </script>
 {% endblock %}

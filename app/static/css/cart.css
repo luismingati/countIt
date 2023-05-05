@@ -32,11 +32,14 @@
 .cart-container {
     display: flex;
     flex-direction: row;
-    margin-top: 50px;
-    
+    margin: 60px 30px 0 30px;
+    gap: 30px;
 }
 .cart-container .products {
     width: 40vw;
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 30px;
 }
 .cart-container .products h2 {
     font-size: 28px;
@@ -44,6 +47,12 @@
     margin-bottom: 20px;
     text-align: center;
 }
+.cart-container .products .product-list {
+    list-style: none;
+    overflow: scroll;
+    height: 55vh;
+}
+
 .cart-container .products .product-list li{
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr;
@@ -89,4 +98,11 @@
     font-weight: 700;
     margin-bottom: 20px;
     text-align: center;
+}
+
+.cart-container .cart {
+    width: 60vw;
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 30px;
 }
