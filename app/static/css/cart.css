@@ -1,8 +1,8 @@
 .page-description {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    justify-items: center;
 }
 .page-description .title {
     font-size: 42px;
@@ -15,10 +15,11 @@
     justify-content: flex-end;
 }
 .search-field{
-    padding: 5px 10px;
-    border: 1px solid lightgray;
+    padding: 5px 12px;
+    border: 2px solid gray;
     border-radius: 10px;
     font-size: 16px;
+    width: 300px;
 }
 .search-field:focus{
     border: 3px solid orange;
@@ -32,7 +33,7 @@
 .cart-container {
     display: flex;
     flex-direction: row;
-    margin: 60px 30px 0 30px;
+    margin: 30px 30px 0 30px;
     gap: 30px;
 }
 .cart-container .products {
