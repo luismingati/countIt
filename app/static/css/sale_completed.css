@@ -1,0 +1,62 @@
+*{
+    text-decoration: none;
+}
+
+.btn-primary{
+    cursor: pointer;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #F67D1A;
+    font-size: 14px;
+    margin: 30px;
+}
+
+.container h2{
+    display: flex;
+    justify-content: center;
+    color: green;
+    font-weight: bold;
+
+}
+
+.container table{
+    border-collapse: collapse;
+    width: 50vw;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.container table thead tr {
+    background-color:#f67d1a;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.container table th, .container table td {
+    padding: 12px 15px;
+}
+
+.container table tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+
+.container table tfoot tr{
+    border-bottom: 1px solid #dddddd;
+    display: flex;
+}
+
+.container table tfoot th{
+    font-weight: bold;
+}
+
+.table-class{
+    display: flex;
+    justify-content: center;
+}
