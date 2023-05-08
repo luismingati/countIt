@@ -5,6 +5,18 @@ from selenium.webdriver.common.alert import Alert
 from selenium import webdriver
 from time import sleep
 
+def userRegister(self):
+    username = self.driver.find_element(By.XPATH, "//input[@name='username']")
+    username.send_keys("kauan123@")
+
+    password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
+    password.send_keys("Graciebarra592@")
+
+    password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
+    password2.send_keys("Graciebarra592@")
+
+    botao = self.driver.find_element(By.CLASS_NAME, "button")
+    botao.click()
 
 class plataformTests(LiveServerTestCase):
     @classmethod
@@ -18,26 +30,12 @@ class plataformTests(LiveServerTestCase):
         cls.driver.quit()
         super().tearDownClass()
 
-
-
-    #ep-27
+    #ep-27 -- Teste Funcionando --
     def Ep27Tests(self):
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
-        username = self.driver.find_element(By.XPATH, "//input[@name='username']")
-        username.send_keys("kauan123@")
-
-        password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
-        password.send_keys("Graciebarra592@")
-
-        password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
-        password2.send_keys("Graciebarra592@")
-
-        botao = self.driver.find_element(By.CLASS_NAME, "button")
-        botao.click()
-
-        sleep(2)
+        userRegister(self)
 
         #cadastrar produto
         for i in range(1,6):
@@ -72,9 +70,8 @@ class plataformTests(LiveServerTestCase):
 
         # validação do teste - Verificar se o produto pesquisado, irá aparecer na pesquisa
         try:
-            tabela = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
-            tabela.find_element(By.XPATH, f"//td[contains(text(), 'Parafuso Sextavado 1')]")
-            assert True
+            element = self.driver.find_element(By.XPATH, "//p[contains(text(), 'Parafuso Sextavado 1')]")
+            assert True, element
             print(" Validação 1 - Produto encontrado na tabela, validação realizada com sucesso.")
         except:
             assert False, "Validação 1 - Produto não encontrado na tabela."
@@ -88,31 +85,19 @@ class plataformTests(LiveServerTestCase):
 
         #resultado da segunda validação
         try:
-            tabela2 = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
+            tabela2 = self.driver.find_element(By.XPATH, "//p[@class='name']")
             tabela2.find_element(By.XPATH, f"//td[contains(text(), 'Iphone 14')]")
             assert False, "Validação 2 - O teste encontrou um erro, o HTML retorna um produto que não existe"
         except:
             assert True
             print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
-    #ep-5
+    #ep-5 -- Problema na validação, olhar o botão de estoque baixo --
     def Ep5Tests(self):
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
-        username = self.driver.find_element(By.XPATH, "//input[@name='username']")
-        username.send_keys("kauan123@")
-
-        password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
-        password.send_keys("Graciebarra592@")
-
-        password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
-        password2.send_keys("Graciebarra592@")
-
-        botao = self.driver.find_element(By.CLASS_NAME, "button")
-        botao.click()
-
-        sleep(2)
+        userRegister(self)
 
         #cadastrar produto com a quantidade minima igual a quantidade
         product_register = self.driver.find_element(By.ID, "product-register")
@@ -164,36 +149,20 @@ class plataformTests(LiveServerTestCase):
 
         # validação do teste - Verificar se o produto pesquisado, irá aparecer na pesquisa
         try:
-            tabela = self.driver.find_element(By.XPATH, "//table[@class='content-table']")
-            tabela.find_element(By.XPATH, f"//td[contains(text(), 'Parafuso Sextavado')]")
-            assert True
+            element = self.driver.find_element(By.XPATH, "//p[contains(text(), 'Parafuso Sextavado')]")
+            assert True, element
             print(" Validação 1 - Produto aparece como estoque mínimo, teste validado")
         except:
             assert False, "Validação 1 - Produto não encontrado na tabela de estoque mínimo, há um erro."
 
-
-
-
-    #ep-3 Tests
+    #ep-3 Tests -- Teste funcionando -- 
     def Ep3Tests(self):
         #--------------------------------VALIDACAO 1 ----------------------------------------------------------------
 
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
-        username = self.driver.find_element(By.XPATH, "//input[@name='username']")
-        username.send_keys("kauan123@")
-
-        password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
-        password.send_keys("Graciebarra592@")
-
-        password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
-        password2.send_keys("Graciebarra592@")
-
-        botao = self.driver.find_element(By.CLASS_NAME, "button")
-        botao.click()
-
-        sleep(1)
+        userRegister(self)
 
         #cadastrar 5 produtos
         for i in range(1,6):
