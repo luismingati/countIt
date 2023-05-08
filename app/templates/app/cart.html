@@ -114,6 +114,9 @@
             if (item.quantity > item.maxQuantity) {
                 alert(`A quantidade solicitada de ${item.name} excede a quantidade disponível no estoque.`);
                 return false;
+            } else if (item.quantity <= 0) {
+                alert(`A quantidade solicitada de ${item.name} é inválida.`);
+                return false;
             }
         }
         const cartItemsField = document.getElementById('cart-items');

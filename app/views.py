@@ -157,9 +157,13 @@ def complete_sale(request):
 
         for product_id, item_data in cart_items_data.items():
             product = get_object_or_404(Product, pk=product_id, user=request.user)
+
             quantity = int(item_data['quantity'])
             if product.quantity < quantity:
                 return redirect('cart')
+            elif product.quantity <= 0:
+                return redirect('cart')
+
             product.quantity -= quantity
             product.save()
 
@@ -175,7 +179,6 @@ def complete_sale(request):
 
         context = {'sale_items': sale_items, 'total_sale': total_sale}
         return render(request, 'app/sale_completed.html', context)
-
     return redirect('cart')
 
 @login_required
