@@ -20,7 +20,7 @@
             {% for product in products %}
                 <li>
                     <p>{{ product.name }}</p>  <p>R${{ product.price }}</p>  <p>Quantidade disponível: {{ product.quantity }}</p>
-                    <button class="add-to-cart-btn" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-quantity="{{ product.quantity }}" onclick="addToCart(event)">Adicionar</button>
+                    <button class="add-to-cart-btn" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-quantity="{{ product.quantity }}" data-product-price="{{ product.price|floatformat:2 }}" onclick="addToCart(event)">Adicionar</button>
                 </li>
             {% endfor %}
         </ul>
@@ -34,15 +34,18 @@
                 </tbody>
             </table>
         </div>
-        <form id="cart-form" method="post" action="{% url 'complete-sale' %}">
-            {% csrf_token %}
-            <input type="hidden" name="cart_items" id="cart-items">
-            <button type="submit" class="finish-btn">Finalizar venda</button>
-        </form>
+        <div class="cart-footer">
+            <p id="total-price">Valor total: R$0</p>
+            <form id="cart-form" method="post" action="{% url 'complete-sale' %}">
+                {% csrf_token %}
+                <input type="hidden" name="cart_items" id="cart-items">
+                <button type="submit" class="finish-btn">Finalizar venda</button>
+            </form>
+        </div>
     </div>
 </div>
 
-<script>
+<script defer>
     let cart = {};
 
     function addToCart(event) {
@@ -50,6 +53,7 @@
         const productId = button.dataset.productId;
         const productName = button.dataset.productName;
         const productQuantity = parseInt(button.dataset.productQuantity);
+        const productPrice = parseFloat(button.dataset.productPrice);
 
         if (cart[productId]) {
             if (cart[productId].quantity < productQuantity) {
@@ -61,21 +65,33 @@
         } else {
             cart[productId] = {
                 name: productName,
+                price: productPrice,
                 quantity: 1,
                 maxQuantity: productQuantity
             };
         }
         updateCartTable();
-}
+        updateTotalPrice();
+    }
 
     function removeFromCart(productId) {
         delete cart[productId];
         updateCartTable();
+        updateTotalPrice();
+    }
+
+    function updateTotalPrice() {
+        let totalPrice = 0;
+        for (const [productId, item] of Object.entries(cart)) {
+            totalPrice += item.quantity * item.price;
+        }
+        document.getElementById('total-price').innerText = `Valor total: R$${totalPrice.toFixed(2)}`;
     }
 
     function updateCartQuantity(productId, newQuantity) {
         cart[productId].quantity = parseInt(newQuantity);
         updateCartTable();
+        updateTotalPrice();
     }
 
     function updateCartTable() {
@@ -107,6 +123,7 @@
 
             cartTable.appendChild(row);
         }
+        updateTotalPrice();
     }
 
     function onSubmit() {

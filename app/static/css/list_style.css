@@ -14,7 +14,7 @@
     align-items: center;   
 }
 .search-content-master h1{
-    font-size: 20px;
+    font-size: 42px;
     font-weight: bold;
     color: #404040;
 }
@@ -26,7 +26,7 @@
     padding: 10px 15px;
     border-radius: 20px;
     background-color: #F67D1A;
-    font-size: 14px;
+    font-size: 18px;
 }
 .search-content{
     position: relative;
