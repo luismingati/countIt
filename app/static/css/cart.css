@@ -76,7 +76,7 @@
 }
 
 .cart-container .products .product-list .add-to-cart-btn {
-    background-color: rgb(47, 255, 92);
+    background-color: rgb(22, 185, 22);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -87,7 +87,7 @@
 }
 
 .cart-container .products .product-list .add-to-cart-btn:hover {
-    background-color:  rgb(47, 255, 141);
+    background-color:  rgb(22, 185, 22);
 }
 
 .cart-container .cart {
@@ -153,7 +153,7 @@
     align-self: flex-end;
 }
 .cart-container .cart #cart-form .finish-btn {
-    background-color: rgb(0, 255, 0);
+    background-color: rgb(22, 185, 22);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
