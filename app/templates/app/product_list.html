@@ -1,11 +1,11 @@
 {% extends 'app/base.html' %}
-{% block content %}
-
 {% block css %}
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/list_style.css">
     <script src="https://kit.fontawesome.com/f83d7a8359.js" crossorigin="anonymous"></script>
 {% endblock css %}
+{% block content %}
+
 
 <div class="search-content-master">
     <h1>Estoque</h1>
@@ -16,28 +16,24 @@
     <button id="toggle-low-stock-btn">Estoque baixo</button>
 </div>
 <div class="left-content">
-    <table class="content-table">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        {% for product in products %}
-        <tbody>
-            <tr class="content">
-                <td>{{product.name}}</td>
-                <td>{{product.quantity}}</td>
-                <td>R${{product.price}}</td>
-                <td>
-                    <a class= "look" href="{% url 'product' product.id %}">Ver</a>
-                </td> 
-            </tr>
-        </tbody>
-        {% endfor %}
-    </table>
+    <div class="content-table">
+        <div class="table-head">
+            <p>Item</p>
+            <p>Quantidade</p>
+            <p>Preço</p>
+            <p>Ações</p>
+        </div>
+        <div class="content">
+            {% for product in products %}
+                <div class="product">
+                    <p class="name">{{product.name}}</p>
+                    <p>{{product.quantity}}</p>
+                    <p>R${{product.price}}</p>
+                    <a class="look" href="{% url 'product' product.id %}">Ver</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>    
 </div>
 <div class="right-content">
     {% if not products %}
