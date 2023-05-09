@@ -76,7 +76,7 @@
 }
 
 .cart-container .products .product-list .add-to-cart-btn {
-    background-color: rgb(47, 255, 92);
+    background-color: rgb(22, 185, 22);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -87,7 +87,7 @@
 }
 
 .cart-container .products .product-list .add-to-cart-btn:hover {
-    background-color:  rgb(47, 255, 141);
+    background-color:  rgb(22, 185, 87);
 }
 
 .cart-container .cart {
@@ -149,11 +149,27 @@
     color: white;
 }
 
-.cart-container .cart #cart-form {
+.cart-container .cart .cart-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-container .cart .cart-footer p {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    border: 2px solid green;
+    border-radius: 10px;
+}
+
+
+.cart-container .cart .cart-footer #cart-form {
     align-self: flex-end;
 }
-.cart-container .cart #cart-form .finish-btn {
-    background-color: rgb(0, 255, 0);
+.cart-container .cart .cart-footer #cart-form .finish-btn {
+    background-color: rgb(22, 185, 22);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

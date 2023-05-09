@@ -53,8 +53,8 @@
         const productId = button.dataset.productId;
         const productName = button.dataset.productName;
         const productQuantity = parseInt(button.dataset.productQuantity);
-        const productPrice = parseFloat(button.dataset.productPrice);
-
+        const productPrice = parseFloat(button.dataset.productPrice).toFixed(2);
+        
         if (cart[productId]) {
             if (cart[productId].quantity < productQuantity) {
                 cart[productId].quantity += 1;
@@ -179,7 +179,8 @@
             button.classList.add('add-to-cart-btn');
             button.dataset.productId = product.id;
             button.dataset.productName = product.name;
-            button.dataset.productQuantity = product.quantity; // Adicione esta linha
+            button.dataset.productQuantity = product.quantity;
+            button.dataset.productPrice = parseFloat(product.price).toFixed(2);
             button.innerText = 'Adicionar';
             button.onclick = addToCart;
             
