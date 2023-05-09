@@ -18,6 +18,12 @@ def userRegister(self):
     botao = self.driver.find_element(By.CLASS_NAME, "button")
     botao.click()
 
+def registerProduct(self):
+    ...
+
+def searchProduct(self):
+    ...
+
 class plataformTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
@@ -30,8 +36,8 @@ class plataformTests(LiveServerTestCase):
         cls.driver.quit()
         super().tearDownClass()
 
-    #ep-27 -- Teste Funcionando --
-    def Ep27Tests(self):
+    def Ep27Tests_vd1(self):
+        # Verifica se um produto que existe no estoque aparece no HTML
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
@@ -76,7 +82,45 @@ class plataformTests(LiveServerTestCase):
         except:
             assert False, "Validação 1 - Produto não encontrado na tabela."
 
-        #teste para verificar se irá aparecer um produto que não existe
+    def Ep27Tests_vd2(self):
+        # Teste para verificar o HTML Retorna um produto que já existe
+        self.driver.get(self.live_server_url + "/register/")
+
+        #cadastrar usuario
+        userRegister(self)
+
+        #cadastrar produto
+        for i in range(1,6):
+            product_register = self.driver.find_element(By.ID, "product-register")
+            product_register.click()
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+            name.send_keys(f"Parafuso Sextavado {i}")
+
+            price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+            price.send_keys("5")
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+            name.send_keys("100")
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+            name.send_keys("10")
+
+            search_button = self.driver.find_element(By.CLASS_NAME, "button")
+            search_button.click()
+
+        sleep(1)
+
+        #pesquisar produto
+        name = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
+        name.send_keys("Parafuso Sextavado 1")
+
+        search_button = self.driver.find_element(By.CLASS_NAME, "search-btn")
+        search_button.click()   
+
+        sleep(1)
+        
+         #teste para verificar se irá aparecer um produto que não existe
         product_error = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
         product_error.send_keys("Iphone 14")
 
@@ -92,8 +136,8 @@ class plataformTests(LiveServerTestCase):
             assert True
             print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
-    #ep-5 -- Problema na validação, olhar o botão de estoque baixo --
     def Ep5Tests(self):
+        # Verifica se produtos com estoque mínimo irão ser retornados quando forem solicitados
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
@@ -155,10 +199,8 @@ class plataformTests(LiveServerTestCase):
         except:
             assert False, "Validação 1 - Produto não encontrado na tabela de estoque mínimo, há um erro."
 
-    #ep-3 Tests -- Teste funcionando -- 
-    def Ep3Tests(self):
-        #--------------------------------VALIDACAO 1 ----------------------------------------------------------------
-
+    def Ep3Tests_vd1(self):
+        # Verifica se consegue vender uma quantidade de produtos maior que a do estoque
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
@@ -220,12 +262,41 @@ class plataformTests(LiveServerTestCase):
             alert.accept()
         except:
             assert False, "Validação 1 - Resultado diferente do esperado, há um erro."
+            
+    def Ep3Tests_vd2(self):
+        self.driver.get(self.live_server_url + "/register/")
 
+        #cadastrar usuario
+        userRegister(self)
 
-        #--------------------------------VALIDACAO 2 ----------------------------------------------------------------
+        #cadastrar 5 produtos
+        for i in range(1,6):
+            product_register = self.driver.find_element(By.ID, "product-register")
+            product_register.click()
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+            name.send_keys(f"Iphone 14 {i}")
+
+            price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+            price.send_keys("1000")
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+            name.send_keys("2")
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+            name.send_keys("1")
+
+            search_button = self.driver.find_element(By.CLASS_NAME, "button")
+            search_button.click()
 
         sleep(1)
 
+        #entrar na pagina de vendas
+        self.driver.get(self.live_server_url + "/vendas/")
+
+        sleep(1)
+
+        #Pesquisar 5 produtos
         for i in range(1,6):
             searchArea = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
             searchArea.send_keys(f"Iphone 14 {i}")
@@ -246,42 +317,3 @@ class plataformTests(LiveServerTestCase):
             print("Validação 2 - A venda dos 5 produtos foi realizada, teste validado com sucesso.")
         except:
             assert False, "Validação 2 - A venda não foi realizada, há um erro."
-
-    def registerProduct(self):
-
-        self.driver.get(self.live_server_url + "/register/")
-
-        #cadastrar usuario
-        username = self.driver.find_element(By.XPATH, "//input[@name='username']")
-        username.send_keys("kauan123@")
-
-        password = self.driver.find_element(By.XPATH, "//input[@name='password1']")
-        password.send_keys("Graciebarra592@")
-
-        password2 = self.driver.find_element(By.XPATH, "//input[@name='password2']")
-        password2.send_keys("Graciebarra592@")
-
-        botao = self.driver.find_element(By.CLASS_NAME, "button")
-        botao.click()
-
-             #cadastrar 5 produtos
-        for i in range(1,25):
-            product_register = self.driver.find_element(By.ID, "product-register")
-            product_register.click()
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-            name.send_keys(f"Iphone 14 {i}")
-
-            price = self.driver.find_element(By.XPATH, "//input[@name='price']")
-            price.send_keys("1000")
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
-            name.send_keys("2")
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
-            name.send_keys("1")
-
-            search_button = self.driver.find_element(By.CLASS_NAME, "button")
-            search_button.click()
-        
-        sleep(10)
