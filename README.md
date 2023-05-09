@@ -32,7 +32,7 @@ Protótipo Navegável Figma: https://www.figma.com/proto/L4wsHpCyzswN1dpXPZfnpe/
 
 Diagrama de Atividades: https://drive.google.com/drive/folders/1G1dfJXF6Zx9hdQCyEuQXo-l9lDxswwAo?usp=share_link
 
-Deploy: http://countit6-env.eba-xbnmmfts.us-east-1.elasticbeanstalk.com/estoque/
+Deploy: http://countit6-env.eba-xbnmmfts.us-east-1.elasticbeanstalk.com/
 
 # Experiência de Programação em Pares:
 https://drive.google.com/file/d/1uro-NzbUQauQ-HGOdpUsdcTfkHmJ3ucW/view?usp=share_link 
