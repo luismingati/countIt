@@ -40,4 +40,25 @@ Deploy: http://countit6-env.eba-xbnmmfts.us-east-1.elasticbeanstalk.com/
 -Terceira Entrega: https://drive.google.com/file/d/1gK48NTZBCWcVOqgeeZoJVA7hH2_wfqjn/view?usp=sharing
 
 # Testes automatizados
+Relizamos os testes automatizados utilizando a ferramenta Selenium, esta aba serve como um passo a passo para realizar os testes na nossa aplicação.
+1- Acesse a pasta countIt, e na linha de comando:
+````
+```
+pip install requirements.txt
+```
+````
+2- garanta ter o webdriver do selenium instalado na raiz do projeto.
+3- Os testes foram feitos através da validações das histórias que estão no Jira, foram dividos por funções, onde cada validação de cada história é executada de maneira independente.
+   Para rodar, basta digitar na linha de comando:
+   ````
+```
+1- python manage.py test app.tests.plataformTests.Ep27Tests_vd1
+2-python manage.py test app.tests.plataformTests.Ep27Tests_vd2
+3- python manage.py test app.tests.plataformTests.Ep5Tests
+4- python manage.py test app.tests.plataformTests.Ep3Tests_vd1
+5- python manage.py test app.tests.plataformTests.Ep27Tests_vd2
+```
+````
+Cada código é digitado uma por vez na linha de comando.
+   
 
