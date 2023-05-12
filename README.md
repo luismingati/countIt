@@ -41,6 +41,7 @@ Deploy: http://countit6-env.eba-xbnmmfts.us-east-1.elasticbeanstalk.com/
 
 # Testes automatizados
 Relizamos os testes automatizados utilizando a ferramenta Selenium, esta aba serve como um passo a passo para realizar os testes na nossa aplicação.
+
 1- Acesse a pasta countIt, e na linha de comando:
 ````
 ```
