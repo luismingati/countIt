@@ -61,6 +61,6 @@ pip install requirements.txt
 5- python manage.py test app.tests.plataformTests.Ep27Tests_vd2
 ```
 
-Cada código é digitado uma por vez na linha de comando.
+Cada código é digitado um por vez na linha de comando.
    
 
