@@ -49,6 +49,7 @@ pip install requirements.txt
 ```
 
 2- garanta ter o webdriver do selenium instalado na raiz do projeto.
+
 3- Os testes foram feitos através da validações das histórias que estão no Jira, foram dividos por funções, onde cada validação de cada história é executada de maneira independente.
    Para rodar, basta digitar na linha de comando:
 
