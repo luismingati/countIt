@@ -55,10 +55,11 @@ pip install requirements.txt
 
 ```
 1- python manage.py test app.tests.plataformTests.Ep27Tests_vd1
-2-python manage.py test app.tests.plataformTests.Ep27Tests_vd2
+2- python manage.py test app.tests.plataformTests.Ep27Tests_vd2
 3- python manage.py test app.tests.plataformTests.Ep5Tests
 4- python manage.py test app.tests.plataformTests.Ep3Tests_vd1
-5- python manage.py test app.tests.plataformTests.Ep27Tests_vd2
+5- python manage.py test app.tests.plataformTests.Ep3Tests_vd2
+6- python manage.py test app.tests.plataformTests.Ep3Tests_vd3
 ```
 
 Cada código é digitado um por vez na linha de comando.
