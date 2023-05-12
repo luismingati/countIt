@@ -317,3 +317,67 @@ class plataformTests(LiveServerTestCase):
             print("Validação 2 - A venda dos 5 produtos foi realizada, teste validado com sucesso.")
         except:
             assert False, "Validação 2 - A venda não foi realizada, há um erro."
+
+    def Ep3Tests_vd3(self):
+        # Verifica se consegue vender uma quantidade de produtos maior que a do estoque
+        self.driver.get(self.live_server_url + "/register/")
+
+        #cadastrar usuario
+        userRegister(self)
+
+        #cadastrar 5 produtos
+        for i in range(1,6):
+            product_register = self.driver.find_element(By.ID, "product-register")
+            product_register.click()
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+            name.send_keys(f"Iphone 14 {i}")
+
+            price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+            price.send_keys("1000")
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+            name.send_keys("10")
+
+            name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+            name.send_keys("1")
+
+            search_button = self.driver.find_element(By.CLASS_NAME, "button")
+            search_button.click()
+
+        sleep(1)
+
+        #entrar na pagina de vendas
+        self.driver.get(self.live_server_url + "/vendas/")
+
+        sleep(1)
+
+        #escolher um produto
+        pesquisarVenda = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
+        pesquisarVenda.send_keys("Iphone 14 1")
+
+        add_button = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
+        add_button.click()
+
+        sleep(1)
+
+        #adicionar quantidade superior a quantidade do estoque
+        quantity = self.driver.find_element(By.XPATH, "//input[@type='number']")
+        quantity.send_keys(Keys.BACKSPACE)
+        sleep(1)
+        quantity.send_keys("-5")
+
+        close_sale = self.driver.find_element(By.CLASS_NAME, "finish-btn")
+        close_sale.click()
+        sleep(1)
+
+        #validar a resposta do alert
+        try:
+             #obter texto do alerta
+            alert = Alert(self.driver)
+            alert_text = alert.text
+            assert True, "A quantidade solicitada de Iphone 14 1 excede a quantidade disponível no estoque." in alert_text
+            print("Validação 1 - O texto do alerta bate com o resultado esperado, teste validado com sucesso")
+            alert.accept()
+        except:
+            assert False, "Validação 1 - Resultado diferente do esperado, há um erro."
