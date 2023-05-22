@@ -3,6 +3,7 @@ from .models import Product, Cart
 from .forms import ProductForm, CategoryForm
 from django.http import JsonResponse
 from json import JSONDecodeError
+from decimal import Decimal
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
@@ -139,11 +140,14 @@ def cart_view(request):
 def complete_sale(request):
     if request.method == 'POST':
         cart_items_json = request.POST.get('cart_items')
-        
-        # Verifique se cart_items_json não está vazio
+        discount_percentage = float(request.POST.get('discount', '0'))
+
         if not cart_items_json:
             return redirect('cart')
-        
+
+        if discount_percentage < 0 or discount_percentage > 100:
+            return redirect('cart')
+
         try:
             cart_items_data = json.loads(cart_items_json)
         except JSONDecodeError:
@@ -168,16 +172,21 @@ def complete_sale(request):
             product.save()
 
             total_item = product.price * quantity
+            total_item_discounted = total_item - (total_item * Decimal(discount_percentage) / 100)
             sale_item = {
                 'name': product.name,
                 'price': product.price,
                 'quantity': quantity,
-                'total': total_item
+                'total': total_item_discounted
             }
             sale_items.append(sale_item)
-            total_sale += total_item
+            total_sale += total_item_discounted
 
-        context = {'sale_items': sale_items, 'total_sale': total_sale}
+        context = {
+            'sale_items': sale_items,
+            'total_sale': total_sale,
+            'discount': discount_percentage 
+        }
         return render(request, 'app/sale_completed.html', context)
     return redirect('cart')
 

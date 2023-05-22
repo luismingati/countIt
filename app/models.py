@@ -33,10 +33,10 @@ class Product(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(Product, through='CartItem')
+    discount = models.FloatField(default=0)
 
     def __str__(self):
         return f'Carrinho de {self.user.username}'
-
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
