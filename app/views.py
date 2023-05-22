@@ -10,6 +10,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from datetime import datetime
 
 def home(request):
     if request.user.is_authenticated:
@@ -159,6 +161,8 @@ def complete_sale(request):
         if not cart_items_data:
             return redirect('cart')
 
+        sale_date = timezone.now()
+
         for product_id, item_data in cart_items_data.items():
             product = get_object_or_404(Product, pk=product_id, user=request.user)
 
@@ -177,7 +181,8 @@ def complete_sale(request):
                 'name': product.name,
                 'price': product.price,
                 'quantity': quantity,
-                'total': total_item_discounted
+                'total': total_item_discounted,
+                'sale_date' : sale_date
             }
             sale_items.append(sale_item)
             total_sale += total_item_discounted
@@ -185,7 +190,8 @@ def complete_sale(request):
         context = {
             'sale_items': sale_items,
             'total_sale': total_sale,
-            'discount': discount_percentage 
+            'discount': discount_percentage ,
+            'sale_date': sale_date
         }
         return render(request, 'app/sale_completed.html', context)
     return redirect('cart')
