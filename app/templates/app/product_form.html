@@ -37,8 +37,13 @@
                 {{ form.min_quantity }}
                 {{ form.min_quantity.errors }}
             </div>
+            <div class="form-group">
+                <label for="{{ form.category.auto_id }}">Categoria:</label>
+                {{ form.category }}
+            </div>
             
             <button class="button" type="submit">Enviar</button>
+            <a class="category" href="{% url 'create-category' %}">Criar Categoria</a>
         </form>
     </div>
 </section>

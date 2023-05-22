@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from .models import Product, Cart
-from .forms import ProductForm
+from .forms import ProductForm, CategoryForm
 from django.http import JsonResponse
 from json import JSONDecodeError
 import json
@@ -187,3 +187,15 @@ def search(request):
     products = Product.objects.filter(user=request.user, name__icontains=query).order_by('-quantity')
     product_data = [{'id': product.id, 'name': product.name, 'price': product.price, 'quantity': product.quantity} for product in products]
     return JsonResponse({'products': product_data})
+
+@login_required
+def create_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product-create')
+    else:
+        form = CategoryForm()
+    
+    return render(request, 'app/create_category.html', {'form':form})

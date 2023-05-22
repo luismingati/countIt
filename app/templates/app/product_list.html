@@ -21,6 +21,7 @@
             <p>Item</p>
             <p>Quantidade</p>
             <p>Preço</p>
+            <p>Categoria</p>
             <p>Ações</p>
         </div>
         <div class="content">
@@ -29,6 +30,7 @@
                     <p class="name">{{product.name}}</p>
                     <p>{{product.quantity}}</p>
                     <p>R${{product.price}}</p>
+                    <p>{{product.category}}</p>
                     <a class="look" href="{% url 'product' product.id %}">Ver</a>
                 </div>
             {% endfor %}
