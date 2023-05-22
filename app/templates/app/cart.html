@@ -38,7 +38,7 @@
             <p id="total-price">Valor total: R$0</p>
             <form id="cart-form" method="post" action="{% url 'complete-sale' %}">
                 {% csrf_token %}
-                <input type="number" step="0.01" name="discount" id="discount" placeholder="Porcentagem de desconto">
+                <input type="number" step="0.01" name="discount" placeholder="Porcentagem de desconto">
                 <input type="hidden" name="cart_items" id="cart-items">
                 <button type="submit" class="finish-btn">Finalizar venda</button>
             </form>

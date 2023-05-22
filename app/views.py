@@ -3,7 +3,7 @@ from .models import Product, Cart
 from .forms import ProductForm, CategoryForm
 from django.http import JsonResponse
 from json import JSONDecodeError
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
@@ -140,10 +140,15 @@ def cart_view(request):
 def complete_sale(request):
     if request.method == 'POST':
         cart_items_json = request.POST.get('cart_items')
-        discount_percentage = float(request.POST.get('discount', '0'))
+        discount_string = request.POST.get('discount', '').strip()
 
         if not cart_items_json:
             return redirect('cart')
+
+        try:
+            discount_percentage = Decimal(discount_string)
+        except InvalidOperation:
+            discount_percentage = Decimal('0')
 
         if discount_percentage < 0 or discount_percentage > 100:
             return redirect('cart')
