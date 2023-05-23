@@ -5,6 +5,7 @@ from selenium.webdriver.common.alert import Alert
 from selenium import webdriver
 from time import sleep
 
+
 def userRegister(self):
     username = self.driver.find_element(By.XPATH, "//input[@name='username']")
     username.send_keys("kauan123@")
@@ -18,11 +19,24 @@ def userRegister(self):
     botao = self.driver.find_element(By.CLASS_NAME, "button")
     botao.click()
 
-def registerProduct(self):
-    ...
+def registerProduct(self, iterator):
+    product_register = self.driver.find_element(By.ID, "product-register")
+    product_register.click()
 
-def searchProduct(self):
-    ...
+    name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+    name.send_keys(f"Parafuso Sextavado {iterator}")
+
+    price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+    price.send_keys("1000")
+
+    name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+    name.send_keys("10")
+
+    name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+    name.send_keys("1")
+
+    search_button = self.driver.find_element(By.CLASS_NAME, "button")
+    search_button.click()
 
 class plataformTests(LiveServerTestCase):
     @classmethod
@@ -45,23 +59,7 @@ class plataformTests(LiveServerTestCase):
 
         #cadastrar produto
         for i in range(1,6):
-            product_register = self.driver.find_element(By.ID, "product-register")
-            product_register.click()
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-            name.send_keys(f"Parafuso Sextavado {i}")
-
-            price = self.driver.find_element(By.XPATH, "//input[@name='price']")
-            price.send_keys("5")
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
-            name.send_keys("100")
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
-            name.send_keys("10")
-
-            search_button = self.driver.find_element(By.CLASS_NAME, "button")
-            search_button.click()
+            registerProduct(self, i)
 
         sleep(1)
 
@@ -91,23 +89,7 @@ class plataformTests(LiveServerTestCase):
 
         #cadastrar produto
         for i in range(1,6):
-            product_register = self.driver.find_element(By.ID, "product-register")
-            product_register.click()
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-            name.send_keys(f"Parafuso Sextavado {i}")
-
-            price = self.driver.find_element(By.XPATH, "//input[@name='price']")
-            price.send_keys("5")
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
-            name.send_keys("100")
-
-            name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
-            name.send_keys("10")
-
-            search_button = self.driver.find_element(By.CLASS_NAME, "button")
-            search_button.click()
+            registerProduct(self, i)
 
         sleep(1)
 
@@ -264,6 +246,7 @@ class plataformTests(LiveServerTestCase):
             assert False, "Validação 1 - Resultado diferente do esperado, há um erro."
             
     def Ep3Tests_vd2(self):
+
         self.driver.get(self.live_server_url + "/register/")
 
         #cadastrar usuario
