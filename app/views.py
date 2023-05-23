@@ -1,14 +1,17 @@
 from django.shortcuts import redirect
 from .models import Product, Cart
-from .forms import ProductForm
+from .forms import ProductForm, CategoryForm
 from django.http import JsonResponse
 from json import JSONDecodeError
+from decimal import Decimal, InvalidOperation
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from datetime import datetime
 
 def home(request):
     if request.user.is_authenticated:
@@ -139,11 +142,19 @@ def cart_view(request):
 def complete_sale(request):
     if request.method == 'POST':
         cart_items_json = request.POST.get('cart_items')
-        
-        # Verifique se cart_items_json não está vazio
+        discount_string = request.POST.get('discount', '').strip()
+
         if not cart_items_json:
             return redirect('cart')
-        
+
+        try:
+            discount_percentage = Decimal(discount_string)
+        except InvalidOperation:
+            discount_percentage = Decimal('0')
+
+        if discount_percentage < 0 or discount_percentage > 100:
+            return redirect('cart')
+
         try:
             cart_items_data = json.loads(cart_items_json)
         except JSONDecodeError:
@@ -154,6 +165,8 @@ def complete_sale(request):
 
         if not cart_items_data:
             return redirect('cart')
+
+        sale_date = timezone.now()
 
         for product_id, item_data in cart_items_data.items():
             product = get_object_or_404(Product, pk=product_id, user=request.user)
@@ -168,16 +181,23 @@ def complete_sale(request):
             product.save()
 
             total_item = product.price * quantity
+            total_item_discounted = total_item - (total_item * Decimal(discount_percentage) / 100)
             sale_item = {
                 'name': product.name,
                 'price': product.price,
                 'quantity': quantity,
-                'total': total_item
+                'total': total_item_discounted,
+                'sale_date' : sale_date
             }
             sale_items.append(sale_item)
-            total_sale += total_item
+            total_sale += total_item_discounted
 
-        context = {'sale_items': sale_items, 'total_sale': total_sale}
+        context = {
+            'sale_items': sale_items,
+            'total_sale': total_sale,
+            'discount': discount_percentage ,
+            'sale_date': sale_date
+        }
         return render(request, 'app/sale_completed.html', context)
     return redirect('cart')
 
@@ -187,3 +207,15 @@ def search(request):
     products = Product.objects.filter(user=request.user, name__icontains=query).order_by('-quantity')
     product_data = [{'id': product.id, 'name': product.name, 'price': product.price, 'quantity': product.quantity} for product in products]
     return JsonResponse({'products': product_data})
+
+@login_required
+def create_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product-create')
+    else:
+        form = CategoryForm()
+    
+    return render(request, 'app/create_category.html', {'form':form})

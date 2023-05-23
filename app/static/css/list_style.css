@@ -83,7 +83,7 @@
 }
 .left-content .content-table .table-head{
     display: grid;
-    grid-template-columns: 3fr 2fr 2fr 1fr;
+    grid-template-columns: 3fr 2fr 2fr 1fr 1fr;
     padding: 15px;
     background-color:#F67D1A;
     border-radius: 10px 10px 0 0;
@@ -97,7 +97,7 @@
 }
 .left-content .content-table .content .product{
     display: grid;
-    grid-template-columns: 3fr 2fr 2fr 1fr;
+    grid-template-columns: 3fr 2fr 2fr 1fr 1fr;
     padding: 10px 0;
     border-bottom: 1px solid lightgray;
 }   

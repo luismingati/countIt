@@ -13,6 +13,7 @@
             <p class="quantity">Quantidade: {{product.quantity}}</p>
             <p class="price">Preço: R${{product.price}}</p>
             <p class="min-quantity">Quantidade mínima: {{ product.min_quantity }}</p>
+            <p class="category">Categoria: {{ product.category }}</p>
             <div class="buttons">
                 <button class="delete">Deletar</button>
                 <a class="edit" href="{% url 'product-update' product.id %}">Editar</a>
