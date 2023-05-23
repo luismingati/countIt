@@ -79,3 +79,16 @@ section .container form .button {
   text-decoration: none;
   margin-top: 20px;
 }
+
+select{
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.category{
+  text-decoration: none;
+  font-weight: normal;
+  color: #753C0D;
+}

@@ -40,10 +40,11 @@
             <div class="form-group">
                 <label for="{{ form.category.auto_id }}">Categoria:</label>
                 {{ form.category }}
+                <label>Gostaria de um nova? <a class="category" href="{% url 'create-category' %}">Criar Nova Categoria</a></label>
             </div>
             
             <button class="button" type="submit">Enviar</button>
-            <a class="category" href="{% url 'create-category' %}">Criar Categoria</a>
+            
         </form>
     </div>
 </section>
