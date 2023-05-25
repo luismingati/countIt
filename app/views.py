@@ -1,9 +1,13 @@
 from django.shortcuts import redirect
-from .models import Product, Cart
+from .models import Product, Cart, Sale, SaleItem
 from .forms import ProductForm, CategoryForm
 from django.http import JsonResponse
 from json import JSONDecodeError
 from decimal import Decimal, InvalidOperation
+from datetime import datetime
+from calendar import monthrange
+from django.db.models.functions import TruncMonth
+from django.db.models import Sum, F
 import json
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
@@ -11,7 +15,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from datetime import datetime
 
 def home(request):
     if request.user.is_authenticated:
@@ -198,6 +201,17 @@ def complete_sale(request):
             'discount': discount_percentage ,
             'sale_date': sale_date
         }
+
+        sale = Sale(user=request.user, total=total_sale)
+        sale.save()
+
+        for sale_item in sale_items:
+            product = Product.objects.get(name=sale_item['name'])
+            quantity = sale_item['quantity']
+            total = sale_item['total']
+            SaleItem(sale=sale, product=product, quantity=quantity, total=total).save()
+
+
         return render(request, 'app/sale_completed.html', context)
     return redirect('cart')
 
@@ -219,3 +233,26 @@ def create_category(request):
         form = CategoryForm()
     
     return render(request, 'app/create_category.html', {'form':form})
+
+
+@login_required
+def dashboard(request):
+    sales_per_month = Sale.objects.filter(user=request.user).annotate(month=TruncMonth('timestamp')).values('month').annotate(total_sales=Sum(F('total'))).order_by('-month')
+
+    context = {
+        'sales_per_month': sales_per_month,
+    }
+    return render(request, 'app/dashboard.html', context)
+
+@login_required
+def monthly_sales_detail(request, year, month):
+    first_day = datetime(year, month, 1)
+    last_day = datetime(year, month, monthrange(year, month)[1])
+
+    sales = Sale.objects.filter(user=request.user, timestamp__range=[first_day, last_day])
+
+    context = {
+        'sales': sales,
+        'month': first_day.strftime('%B %Y'),
+    }
+    return render(request, 'app/monthly_sales_detail.html', context)

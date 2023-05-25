@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<h2>Detalhes de vendas para {{ month }}</h2>
+
+<table>
+  <tr>
+    <th>Data da venda</th>
+    <th>Total</th>
+    <th>Itens</th>
+  </tr>
+  {% for sale in sales %}
+  <tr>
+    <td>{{ sale.timestamp|date:"d/m/Y" }}</td>
+    <td>{{ sale.total }}</td>
+    <td>
+      <ul>
+      {% for item in sale.saleitem_set.all %}
+        <li>{{ item.product.name }}: {{ item.quantity }}</li>
+      {% endfor %}
+      </ul>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

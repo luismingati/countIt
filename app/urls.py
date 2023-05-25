@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import product_list, product_detail,create_product, product_update, product_delete, home, login_view, register, cart_view, complete_sale, search, create_category
+from .views import product_list, product_detail,create_product, product_update, product_delete, home, login_view, register, cart_view, complete_sale, search, create_category, dashboard, monthly_sales_detail
 from django.contrib.auth.views import LogoutView
 
 
@@ -17,4 +17,6 @@ urlpatterns=[
     path('vendas/concluir/', complete_sale, name='complete-sale'),
     path('search/', search, name='search'),
     path('createCategory/', create_category, name='create-category'),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/sales/<int:year>/<int:month>', monthly_sales_detail, name='monthly_sales_detail'),
 ]

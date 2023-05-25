@@ -1,0 +1,18 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<table>
+  <tr>
+    <th>Mês</th>
+    <th>Total de Vendas</th>
+  </tr>
+  {% for sale in sales_per_month %}
+  <tr>
+    <td><a href="{% url 'monthly_sales_detail' year=sale.month.year month=sale.month.month %}">{{ sale.month|date:"F Y" }}</a></td>
+    <td>{{ sale.total_sales|floatformat:2 }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

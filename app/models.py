@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
-
+from django.conf import settings
+from decimal import Decimal
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -42,6 +43,24 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+
+    def __str__(self):
+        return f'{self.product.name} - {self.quantity}'
+
+class Sale(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    total = models.DecimalField(max_digits=9, decimal_places=2)
+    discount = models.FloatField(default=0)
+    
+    def formatted_date(self):
+        return self.timestamp.strftime('%d/%m/%Y')
+    
+class SaleItem(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    total = models.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(0.1)])
 
     def __str__(self):
         return f'{self.product.name} - {self.quantity}'
