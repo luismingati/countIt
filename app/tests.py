@@ -20,38 +20,36 @@ def userRegister(self):
     botao = self.driver.find_element(By.CLASS_NAME, "button")
     botao.click()
 
-def registerProduct(self, iterator):
-
-    create_category = self.driver.find_element(By.XPATH, "//a[@class='category']")
-    create_category.click()
+def registerProduct(self):
+    #1-Criar categoria
+    self.driver.get(self.live_server_url + "/createCategory/")
 
     category_name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-    category_name.send_keys("Iphone")
+    category_name.send_keys("Telefones")
 
-    category_button = self.driver.find_element(By.XPATH, "//button[@class='create-category']")
+    category_button = self.driver.find_element(By.CLASS_NAME, "create-category")
     category_button.click()
+
+    sleep(1)
+
+    name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+    name.send_keys("Iphone 14")
+
+    price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+    price.send_keys("14000")
+
+    quantity = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+    quantity.send_keys("10")
+
+    min_quantity = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+    min_quantity.send_keys("1")
 
     select_element = self.driver.find_element(By.XPATH, "//select[@id='id_category']")
     select = Select(select_element)
-    select.select_by_value("Iphone")
-    
-    product_register = self.driver.find_element(By.ID, "product-register")
-    product_register.click()
+    select.select_by_visible_text("Telefones")
 
-    name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-    name.send_keys(f"Parafuso Sextavado {iterator}")
-
-    price = self.driver.find_element(By.XPATH, "//input[@name='price']")
-    price.send_keys("1000")
-
-    name = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
-    name.send_keys("10")
-
-    name = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
-    name.send_keys("1")
-
-    search_button = self.driver.find_element(By.CLASS_NAME, "button")
-    search_button.click()
+    button = self.driver.find_element(By.CLASS_NAME, "button")
+    button.click()
 
 class plataformTests(LiveServerTestCase):
     @classmethod
@@ -387,18 +385,87 @@ class plataformTests(LiveServerTestCase):
 
         self.driver.get(self.live_server_url + "/register/")
 
+        self.driver.refresh()
+
         userRegister(self)
 
-        registerProduct(self, 1)
+        registerProduct(self)
 
-        sleep(10)
+        self.driver.get(self.live_server_url + "/vendas/")
 
-    
+        add_product_cart = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
+        add_product_cart.click()
+
+        discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
+        discount.send_keys("101")
+
+        finish_sale =  self.driver.find_element(By.CLASS_NAME, "finish-btn")
+        finish_sale.click()
+
+        try:
+            current_url = self.driver.current_url
+            expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
+            assert True, current_url != expected_url
+            print("O produto não foi vendido, teste validado.")
+        except:
+            assert False, "A venda foi realizada, há um erro."
+
     def Ep14Tests_vd2(self):
-        ...
+        self.driver.get(self.live_server_url + "/register/")
+
+        self.driver.refresh()
+
+        userRegister(self)
+
+        registerProduct(self)
+
+        self.driver.get(self.live_server_url + "/vendas/")
+
+        add_product_cart = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
+        add_product_cart.click()
+
+        discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
+        discount.send_keys("-10")
+
+        finish_sale =  self.driver.find_element(By.CLASS_NAME, "finish-btn")
+        finish_sale.click()
+
+        try:
+            current_url = self.driver.current_url
+            expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
+            assert True, current_url != expected_url
+            print("O produto não foi vendido, teste validado.")
+        except:
+            assert False, "A venda foi realizada, há um erro."
     
-    def Ep14Tests_vd2(self):
-        ...
+    def Ep14Tests_vd3(self):
+        self.driver.get(self.live_server_url + "/register/")
+
+        self.driver.refresh()
+
+        userRegister(self)
+
+        registerProduct(self)
+
+        self.driver.get(self.live_server_url + "/vendas/")
+
+        add_product_cart = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
+        add_product_cart.click()
+
+        discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
+        discount.send_keys("10")
+
+        finish_sale =  self.driver.find_element(By.CLASS_NAME, "finish-btn")
+        finish_sale.click()
+
+        try:
+            current_url = self.driver.current_url
+            expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
+            price_element = self.driver.find_element(By.XPATH, "//td[@class='final-price' and contains(text(), '12600')]")
+            assert True, current_url == expected_url and price_element
+            print("O produto foi vendido e o desconto está correto, teste validado.")
+        except:
+            assert False, "Há um erro."
 
     def Ep29Tests_vd1(self):
         ...

@@ -22,7 +22,7 @@
                             <td>{{ item.name }}</td>
                             <td>R$ {{ item.price }}</td>
                             <td>{{ item.quantity }}</td>
-                            <td>R$ {{ item.total|floatformat:2 }}</td>
+                            <td class="final-price">R$ {{ item.total|floatformat:2 }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -30,7 +30,6 @@
                     <tr>
                         <th colspan="3" class="text-right">Valor Total da Venda:</th>
                         <th>R$ {{ total_sale|floatformat:2 }}</th>
-                        <p>{{ sale_date }}</p>
                     </tr>
                 </tfoot>
             </table>
