@@ -30,7 +30,7 @@
                     <p class="name">{{product.name}}</p>
                     <p>{{product.quantity}}</p>
                     <p>R${{product.price}}</p>
-                    <p>{{product.category}}</p>
+                    <p class="category">{{product.category}}</p>
                     <a class="look" href="{% url 'product' product.id %}">Ver</a>
                 </div>
             {% endfor %}

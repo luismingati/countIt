@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+from collections import Counter
 from selenium import webdriver
 from time import sleep
 
@@ -20,20 +22,15 @@ def userRegister(self):
     botao = self.driver.find_element(By.CLASS_NAME, "button")
     botao.click()
 
-def registerProduct(self):
+def registerProduct(self,iterator):
     #1-Criar categoria
-    self.driver.get(self.live_server_url + "/createCategory/")
 
-    category_name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-    category_name.send_keys("Telefones")
-
-    category_button = self.driver.find_element(By.CLASS_NAME, "create-category")
-    category_button.click()
+    createCategory(self, "Telefones")
 
     sleep(1)
 
     name = self.driver.find_element(By.XPATH, "//input[@name='name']")
-    name.send_keys("Iphone 14")
+    name.send_keys(f"Iphone 14 {iterator}")
 
     price = self.driver.find_element(By.XPATH, "//input[@name='price']")
     price.send_keys("14000")
@@ -50,6 +47,16 @@ def registerProduct(self):
 
     button = self.driver.find_element(By.CLASS_NAME, "button")
     button.click()
+
+def createCategory(self, name):
+    self.driver.get(self.live_server_url + "/createCategory/")
+
+    category_name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+    category_name.send_keys(f"{name}")
+
+    
+    category_button = self.driver.find_element(By.CLASS_NAME, "create-category")
+    category_button.click()
 
 class plataformTests(LiveServerTestCase):
     @classmethod
@@ -468,16 +475,118 @@ class plataformTests(LiveServerTestCase):
             assert False, "Há um erro."
 
     def Ep29Tests_vd1(self):
-        ...
+        self.driver.get(self.live_server_url + "/register/")
+
+        self.driver.refresh()
+
+        userRegister(self)
+
+        createCategory(self, "Telefones")
+
+        select_element = self.driver.find_element(By.XPATH, "//select[@id='id_category']")
+        select = Select(select_element)
+        select.select_by_visible_text("Telefones")
+
+        sleep(10)
+
+        try:
+            select_element = self.driver.find_element(By.ID, "id_category")
+            selected_option = select_element.find_element(By.XPATH, f"./option[text()='Telefones']")
+            assert selected_option
+            print("In select tag exists the option 'Telefones'. Test validated.")
+        except AssertionError:
+            print("There is an error.")
     
     def Ep29Tests_vd2(self):
-        ...
+        self.driver.get(self.live_server_url + "/register/")
+
+        self.driver.refresh()
+
+        userRegister(self)
+
+        for i in range(1,6):
+            registerProduct(self, i)
+
+        try:
+            category_elements = self.driver.find_elements(By.CSS_SELECTOR, "p.category")
+            
+            for category_element in category_elements:
+                if category_element.text != "Telefones":
+                    raise AssertionError("Not all categories have the text 'Telefones'")
+            
+            print("All categories have the text 'Telefones'. Test validated.")
+        except AssertionError as e:
+            print(str(e))
     
     def Ep29Tests_vd3(self):
-        ...
-    
+        self.driver.get(self.live_server_url + "/register/")
+        self.driver.refresh()
+
+        userRegister(self)
+
+        for i in range(0,2):
+            createCategory(self, "Telefones")
+
+        
+        try:
+            select_element = self.driver.find_element(By.XPATH, "//select[@id='id_category']")
+            options = select_element.find_elements(By.TAG_NAME, "option")
+            option_names = [option.text for option in options]
+
+            duplicate_options = [name for name, count in Counter(option_names).items() if count > 1]
+
+            if len(duplicate_options) == 0:
+                print("No duplicate options found in the select element. Test validated")
+            else:
+                print(f"Duplicate options found: {', '.join(duplicate_options)}, There is an error.")
+        except NoSuchElementException:
+            print("Select element not found.")
+
     def Ep29Tests_vd4(self):
-        ...
+        self.driver.get(self.live_server_url + "/register/")
+        self.driver.refresh()
+
+        userRegister(self)
+
+        for i in range(0,2):
+            registerProduct(self, i)
+
+        createCategory(self, "Iphones")
+
+        name = self.driver.find_element(By.XPATH, "//input[@name='name']")
+        name.send_keys("Iphone 14 1")
+
+        price = self.driver.find_element(By.XPATH, "//input[@name='price']")
+        price.send_keys("14000")
+
+        quantity = self.driver.find_element(By.XPATH, "//input[@name='quantity']")
+        quantity.send_keys("10")
+
+        min_quantity = self.driver.find_element(By.XPATH, "//input[@name='min_quantity']")
+        min_quantity.send_keys("1")
+
+        select_element = self.driver.find_element(By.XPATH, "//select[@id='id_category']")
+        select = Select(select_element)
+        select.select_by_visible_text("Iphones")
+
+        button = self.driver.find_element(By.CLASS_NAME, "button")
+        button.click()
+
+        try:
+            name_elements = self.driver.find_elements(By.CSS_SELECTOR, "p.name")
+            names = [name_element.text for name_element in name_elements]
+
+            duplicate_names = [name for name, count in Counter(names).items() if count > 1]
+
+            if len(duplicate_names) >= 2:
+                print("Two or more <p> tags with class 'name' have the same name.There is an error.")
+            else:
+                print("Less than two <p> tags with class 'name' have the same name.Test validated.")
+        except NoSuchElementException:
+            print("No <p> tags with class 'name' found.")
+
+        
+
 
     def Ep2Tests_vd1(self):
         ...
