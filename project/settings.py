@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

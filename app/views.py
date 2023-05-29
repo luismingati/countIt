@@ -8,7 +8,9 @@ from datetime import datetime
 from calendar import monthrange
 from django.db.models.functions import TruncMonth
 from django.db.models import Sum, F
+from django.db import IntegrityError
 import json
+from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -93,31 +95,30 @@ def product_detail(request, pk):
     context = {'product': product}
     return render(request, 'app/product_detail.html', context)
 
-@login_required
 def create_product(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, user=request.user)
         if form.is_valid():
             product = form.save(commit=False)
             product.user = request.user
             product.save()
             return redirect('products')
     else:
-        form = ProductForm()
+        form = ProductForm(user=request.user)
     return render(request, 'app/product_form.html', {'form': form})
     
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, instance=product, user=request.user)
         if form.is_valid():
             product = form.save(commit=False)
             product.user = request.user
             product.save()
             return redirect('products')
     else:
-        form = ProductForm(instance=product)
+        form = ProductForm(instance=product, user=request.user)
     return render(request, 'app/product_form.html', {'form': form})
 
 @login_required
@@ -186,11 +187,12 @@ def complete_sale(request):
             total_item = product.price * quantity
             total_item_discounted = total_item - (total_item * Decimal(discount_percentage) / 100)
             sale_item = {
+                'id': product.id,
                 'name': product.name,
                 'price': product.price,
                 'quantity': quantity,
                 'total': total_item_discounted,
-                'sale_date' : sale_date
+                'sale_date': sale_date
             }
             sale_items.append(sale_item)
             total_sale += total_item_discounted
@@ -206,7 +208,7 @@ def complete_sale(request):
         sale.save()
 
         for sale_item in sale_items:
-            product = Product.objects.get(name=sale_item['name'])
+            product = Product.objects.get(id=sale_item['id'])
             quantity = sale_item['quantity']
             total = sale_item['total']
             SaleItem(sale=sale, product=product, quantity=quantity, total=total).save()
@@ -224,16 +226,19 @@ def search(request):
 
 @login_required
 def create_category(request):
+    error_message = ''
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('product-create')
+            try:
+                form.save(user=request.user)
+                return redirect('product-create')
+            except IntegrityError:
+                error_message = "Você já tem uma categoria com este nome."
+                form = CategoryForm() 
     else:
         form = CategoryForm()
-    
-    return render(request, 'app/create_category.html', {'form':form})
-
+    return render(request, 'app/create_category.html', {'form':form, 'error_message': error_message})
 
 @login_required
 def dashboard(request):
