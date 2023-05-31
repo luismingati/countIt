@@ -4,13 +4,11 @@ from .forms import ProductForm, CategoryForm
 from django.http import JsonResponse
 from json import JSONDecodeError
 from decimal import Decimal, InvalidOperation
-from datetime import datetime
-from calendar import monthrange
+import calendar
 from django.db.models.functions import TruncMonth
 from django.db.models import Sum, F
 from django.db import IntegrityError
 import json
-from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -251,13 +249,15 @@ def dashboard(request):
 
 @login_required
 def monthly_sales_detail(request, year, month):
-    first_day = datetime(year, month, 1)
-    last_day = datetime(year, month, monthrange(year, month)[1])
+    now = timezone.localtime(timezone.now())
+    first_day = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    last_day = now.replace(day=calendar.monthrange(now.year, now.month)[1], hour=23, minute=59, second=59, microsecond=999999)
 
-    sales = Sale.objects.filter(user=request.user, timestamp__range=[first_day, last_day])
+    sales = Sale.objects.filter(user=request.user, timestamp__range=(first_day, last_day))
 
     context = {
         'sales': sales,
-        'month': first_day.strftime('%B %Y'),
+        'month': now.strftime('%B')
     }
+
     return render(request, 'app/monthly_sales_detail.html', context)
