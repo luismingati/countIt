@@ -1,26 +1,34 @@
 {% extends "app/base.html" %}
-
+{% block css %}
+<link rel="stylesheet" href="/static/css/reset.css">
+<link rel="stylesheet" href="/static/css/monthly-sales-detail.css">
+{% endblock css %}
 {% block content %}
-<h2>Detalhes de vendas para {{ month }}</h2>
+<a href="{% url 'dashboard' %}" class="btn-primary">Voltar para o Dashboard</a>
+<main class="details-content-master">
+  <h2>Detalhes de vendas de {{ month }}</h2>
 
-<table>
-  <tr>
-    <th>Data da venda</th>
-    <th>Total</th>
-    <th>Itens</th>
-  </tr>
-  {% for sale in sales %}
-  <tr>
-    <td>{{ sale.timestamp|date:"d/m/Y" }}</td>
-    <td>{{ sale.total }}</td>
-    <td>
-      <ul>
-      {% for item in sale.saleitem_set.all %}
-        <li>{{ item.product.name }}: {{ item.quantity }}</li>
+  <div class="container-master-itens">
+    <table class="table-details">
+      <tr class="table-header">
+        <th class="tamanho-datavenda">Data da venda</th>
+        <th class="tamanho-total">Total</th>
+        <th class="tamanho-itens">Itens</th>
+      </tr>
+      {% for sale in sales %}
+      <tr class="table-itens">
+        <td class="tamanho-datavenda">{{ sale.timestamp|date:"d/m/Y" }}</td>
+        <td class="tamanho-total">{{ sale.total }}</td>
+        <td class="tamanho-itens">
+          <ul>
+            {% for item in sale.saleitem_set.all %}
+            <li>{{ item.product.name }} x{{ item.quantity }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
       {% endfor %}
-      </ul>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
+    </table>
+  </div>
+</main>
 {% endblock %}

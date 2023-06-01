@@ -249,15 +249,17 @@ def dashboard(request):
 
 @login_required
 def monthly_sales_detail(request, year, month):
-    now = timezone.localtime(timezone.now())
-    first_day = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    last_day = now.replace(day=calendar.monthrange(now.year, now.month)[1], hour=23, minute=59, second=59, microsecond=999999)
+    year = int(year)
+    month = int(month)
+
+    first_day = timezone.datetime(year, month, 1, tzinfo=timezone.get_current_timezone())
+    last_day = first_day + timezone.timedelta(days=calendar.monthrange(year, month)[1]) - timezone.timedelta(seconds=1)
 
     sales = Sale.objects.filter(user=request.user, timestamp__range=(first_day, last_day))
 
     context = {
         'sales': sales,
-        'month': now.strftime('%B')
+        'month': first_day.strftime('%B')
     }
 
     return render(request, 'app/monthly_sales_detail.html', context)
