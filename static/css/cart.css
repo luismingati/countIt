@@ -178,3 +178,8 @@
     font-weight: 700;
     color: black;
 }
+.cart-footer #cart-form  [type="number"]{
+    padding: 10px;
+    border: 1px solid lightgray;
+    font-size: 16px;
+}
