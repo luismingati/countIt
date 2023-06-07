@@ -494,22 +494,16 @@ class plataformTests(StaticLiveServerTestCase):
 
         userRegister(self)
 
-        for i in range(0,2):
-            createCategory(self,"Telefones")
-        
+        createCategory(self,"Telefones")
+
+        createCategory(self, "Telefones")
+
         try:
-            select_element = self.driver.find_element(By.XPATH, "//select[@id='id_category']")
-            options = select_element.find_elements(By.TAG_NAME, "option")
-            option_names = [option.text for option in options]
-
-            duplicate_options = [name for name, count in Counter(option_names).items() if count > 1]
-
-            if len(duplicate_options) == 0:
-                print("No duplicate options found in the select element. Test validated")
-            else:
-                print(f"Duplicate options found: {', '.join(duplicate_options)}, There is an error.")
-        except NoSuchElementException:
-            print("Select element not found.")
+            element = self.driver.find_element(By.XPATH, "//p[contains(text(), 'Você já tem uma categoria com este nome.')]")
+            assert True, element
+            print("Categoria não foi cadastrada.")
+        except:
+            assert False, "Validação 1 - Produto não encontrado na tabela."
 
     #FALTA FAZER
     # def Test_2_vd1(self):
