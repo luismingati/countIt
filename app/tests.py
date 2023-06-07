@@ -8,6 +8,7 @@ from collections import Counter
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.chrome.options import Options
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 ##
 def userRegister(self):
@@ -54,7 +55,7 @@ def createCategory(self,name):
     category_button = self.driver.find_element(By.CLASS_NAME, "create-category")
     category_button.click()
 
-class plataformTests(LiveServerTestCase):
+class plataformTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         chrome_options = Options()
