@@ -553,5 +553,43 @@ class plataformTests(StaticLiveServerTestCase):
         except:
             print("Relatório retornado diferente do esperado, há um erro.")
     #falta fazer
-    # def Test_2_vd3(self):
-        ...
+    def test_2_vd3(self):
+        self.driver.get(self.live_server_url + "/register/")
+
+        self.driver.refresh()
+
+        userRegister(self)
+
+        createCategory(self, "Telefones")
+
+        registerProduct(self, 1)
+
+        self.driver.get(self.live_server_url + "/vendas/")
+
+        add_product_cart = self.driver.find_element(By.XPATH,"//button[@class='add-to-cart-btn']")
+
+        if add_product_cart.is_enabled():
+            self.driver.execute_script("arguments[0].scrollIntoView();", add_product_cart)
+            add_product_cart.click()
+        else:
+            # O elemento está desabilitado, faça algo aqui, se necessário
+            print("O elemento está desabilitado.")
+
+        finish_sale =  self.driver.find_element(By.CLASS_NAME, "finish-btn")
+        finish_sale.click()
+
+        self.driver.get(self.live_server_url + "/dashboard/")
+
+        td_element = self.driver.find_element(By.XPATH, "//td[@class='value-itens']")
+
+        # Get the text of the found element
+        text = td_element.text
+
+        print(text)
+
+        try:
+            expected_text = "R$ 14000,00"
+            assert text == expected_text
+            print("Foi vendido um produto no valor de R$14000,00, e o mesmo aparece corretamente no relatório, teste validado com sucesso.")
+        except:
+            print("Relatório retorna um resultado não esperado, há um erro.")
