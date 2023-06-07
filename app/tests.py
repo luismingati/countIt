@@ -13,6 +13,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from urllib.parse import urlparse
 
 def userRegister(self):
     username = self.driver.find_element(By.XPATH, "//input[@name='username']")
@@ -506,8 +507,26 @@ class plataformTests(StaticLiveServerTestCase):
             assert False, "Validação 1 - Produto não encontrado na tabela."
 
     #FALTA FAZER
-    # def Test_2_vd1(self):
-    #     ...
+    def test_2_vd1(self):
+        self.driver.get(self.live_server_url + "/register/")
+
+        self.driver.refresh()
+
+        userRegister(self)
+        sleep(1)
+        self.driver.get(self.live_server_url + "/dashboard/")
+
+        parsed_url = urlparse(self.live_server_url)
+        port = parsed_url.port
+
+        try:
+            url_current = self.driver.current_url
+            url_expected = f'http://localhost:{port}/dashboard/'
+            assert url_current == url_expected
+            print("Foi acessada a página de venda, teste validado.")
+        except:
+            print(url_expected)
+            print("A url não é a esperada, há um erro.")
 
     # def Test_2_vd2(self):
     #     ...
