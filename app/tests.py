@@ -58,16 +58,18 @@ def createCategory(self,name):
 class plataformTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         cls.driver = webdriver.Chrome(options=chrome_options)
 
+
     @classmethod
     def tearDownClass(cls):
-        cls.driver.quit()
         super().tearDownClass()
+        cls.driver.quit()
 
     def test_27_vd1(self):
         # Verifica se um produto que existe no estoque aparece no HTML
