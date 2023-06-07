@@ -7,8 +7,9 @@ from selenium.common.exceptions import NoSuchElementException
 from collections import Counter
 from selenium import webdriver
 from time import sleep
+from selenium.webdriver.chrome.options import Options
 
-
+##
 def userRegister(self):
     username = self.driver.find_element(By.XPATH, "//input[@name='username']")
     username.send_keys("kauan123@")
@@ -56,9 +57,11 @@ def createCategory(self,name):
 class plataformTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
-        cls.driver = webdriver.Chrome()
-        cls.driver.implicitly_wait(10)
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        cls.driver = webdriver.Chrome(options=chrome_options)
 
     @classmethod
     def tearDownClass(cls):
