@@ -103,9 +103,9 @@ class plataformTests(StaticLiveServerTestCase):
         try:
             element = self.driver.find_element(By.XPATH, "//p[contains(text(), 'Iphone 14 1')]")
             assert True, element
-            print(" Validação 1 - Produto encontrado na tabela, validação realizada com sucesso.")
+            print("Produto encontrado na tabela, teste validado com sucesso.")
         except:
-            assert False, "Validação 1 - Produto não encontrado na tabela."
+            assert False, "Produto não encontrado na tabela, há um erro."
   
     def test_27_vd2(self):
         # Teste para verificar o HTML Retorna um produto que já existe
@@ -143,10 +143,10 @@ class plataformTests(StaticLiveServerTestCase):
         try:
             tabela2 = self.driver.find_element(By.XPATH, "//p[@class='name']")
             tabela2.find_element(By.XPATH, f"//td[contains(text(), 'Iphone 14')]")
-            assert False, "Validação 2 - O teste encontrou um erro, o HTML retorna um produto que não existe"
+            assert False, "O teste encontrou um erro, o HTML retorna um produto que não existe, há um erro"
         except:
             assert True
-            print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
+            print("O produto não foi encontrado, teste foi validado com sucesso.")
     
     def test_5(self):
         # Verifica se produtos com estoque mínimo irão ser retornados quando forem solicitados
@@ -198,9 +198,9 @@ class plataformTests(StaticLiveServerTestCase):
         try:
             element = self.driver.find_element(By.XPATH, "//p[contains(text(), 'Iphone 14')]")
             assert True, element
-            print(" Validação 1 - Produto aparece como estoque mínimo, teste validado")
+            print("Produto aparece como estoque mínimo, teste validado com sucesso.")
         except:
-            assert False, "Validação 1 - Produto não encontrado na tabela de estoque mínimo, há um erro."
+            assert False, "Produto não encontrado na tabela de estoque mínimo, há um erro."
     
     def test_3_vd1(self):
         # Verifica se consegue vender uma quantidade de produtos maior que a do estoque
@@ -254,10 +254,10 @@ class plataformTests(StaticLiveServerTestCase):
             alert = Alert(self.driver)
             alert_text = alert.text
             assert True, "A quantidade solicitada de Iphone 14 1 excede a quantidade disponível no estoque." in alert_text
-            print("Validação 1 - O texto do alerta bate com o resultado esperado, teste validado com sucesso")
+            print("O texto do alerta bate com o resultado esperado, teste validado com sucesso")
             alert.accept()
         except:
-            assert False, "Validação 1 - Resultado diferente do esperado, há um erro."  
+            assert False, "Resultado diferente do esperado, há um erro."  
 
     def test_3_vd2(self):
         self.driver.get(self.live_server_url + "/register/")
@@ -304,9 +304,9 @@ class plataformTests(StaticLiveServerTestCase):
             current_url = self.driver.current_url
             expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
             assert True, current_url == expected_url
-            print("Validação 2 - A venda dos 5 produtos foi realizada, teste validado com sucesso.")
+            print("A venda dos 5 produtos foi realizada, teste validado com sucesso.")
         except:
-            assert False, "Validação 2 - A venda não foi realizada, há um erro."
+            assert False, "A venda não foi realizada, há um erro."
 
     def test_14_vd1(self):
 
@@ -341,7 +341,7 @@ class plataformTests(StaticLiveServerTestCase):
             current_url = self.driver.current_url
             expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
             assert True, current_url != expected_url
-            print("O produto não foi vendido, teste validado.")
+            print("O produto não foi vendido, teste validado com sucesso.")
         except:
             assert False, "A venda foi realizada, há um erro."
 
@@ -385,7 +385,7 @@ class plataformTests(StaticLiveServerTestCase):
             current_url = self.driver.current_url
             expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
             assert True, current_url != expected_url
-            print("O produto não foi vendido, teste validado.")
+            print("O produto não foi vendido, teste validado com sucesso.")
         except:
             assert False, "A venda foi realizada, há um erro."
     
@@ -430,9 +430,9 @@ class plataformTests(StaticLiveServerTestCase):
             expected_url = 'http://127.0.0.1:8000/vendas/concluir/'
             price_element = self.driver.find_element(By.XPATH, "//td[@class='final-price' and contains(text(), '12600')]")
             assert True, current_url == expected_url and price_element
-            print("O produto foi vendido e o desconto está correto, teste validado.")
+            print("O produto foi vendido e o desconto está correto, teste validado com sucesso.")
         except:
-            assert False, "Há um erro."
+            assert False, "A venda não foi realizada corretamente, Há um erro."
 
     def test_29_vd1(self):
         self.driver.get(self.live_server_url + "/register/")
@@ -453,9 +453,9 @@ class plataformTests(StaticLiveServerTestCase):
             select_element = self.driver.find_element(By.ID, "id_category")
             selected_option = select_element.find_element(By.XPATH, f"./option[text()='Telefones']")
             assert selected_option
-            print("In select tag exists the option 'Telefones'. Test validated.")
+            print("Existe a opção 'Telefones' na tag select de categoria, teste validado com sucesso.")
         except AssertionError:
-            print("There is an error.")
+            print("A opção 'Telefones' na tag select não existe, há um erro.")
 
     def test_29_vd2(self):
         self.driver.get(self.live_server_url + "/register/")
@@ -476,7 +476,7 @@ class plataformTests(StaticLiveServerTestCase):
                 if category_element.text != "Telefones":
                     raise AssertionError("Not all categories have the text 'Telefones'")
             
-            print("All categories have the text 'Telefones'. Test validated.")
+            print("Os dois produtos foram adicionados a categoria 'Telefones' com sucesso, teste validado com sucesso.")
         except AssertionError as e:
             print(str(e))
 
@@ -493,7 +493,7 @@ class plataformTests(StaticLiveServerTestCase):
         try:
             element = self.driver.find_element(By.XPATH, "//p[contains(text(), 'Você já tem uma categoria com este nome.')]")
             assert True, element
-            print("Categoria não foi cadastrada.Teste Validado.")
+            print("Categoria não foi cadastrada.Teste Validado com sucesso.")
         except:
             assert False, "Categoria foi cadastrada, há um erro."
     #falta fazer
@@ -511,7 +511,7 @@ class plataformTests(StaticLiveServerTestCase):
             expected_url = self.live_server_url + "/dashboard/"
             current_url =   self.driver.current_url
             assert expected_url == current_url
-            print("A página de relatórios foi acessada corretamente, teste validado.")
+            print("A página de relatórios foi acessada corretamente, teste validado com sucesso.")
         except:
             print("A página de relatórios não foi acessada corretamente, há um erro.")
   
@@ -549,9 +549,9 @@ class plataformTests(StaticLiveServerTestCase):
 
         try:
             assert text == "Iphone 14 1 x1"
-            print("Um produto vendido aparece corretamente no relatório, teste validado.")
+            print("Um produto vendido aparece corretamente no relatório, teste validado com sucesso.")
         except:
-            print("Há um erro.")
+            print("Relatório retornado diferente do esperado, há um erro.")
     #falta fazer
     # def Test_2_vd3(self):
         ...
