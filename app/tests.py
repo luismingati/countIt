@@ -9,8 +9,11 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.chrome.options import Options
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
-##
 def userRegister(self):
     username = self.driver.find_element(By.XPATH, "//input[@name='username']")
     username.send_keys("kauan123@")
@@ -71,6 +74,7 @@ class plataformTests(StaticLiveServerTestCase):
         super().tearDownClass()
         cls.driver.quit()
 
+    ## ok 
     def test_27_vd1(self):
         # Verifica se um produto que existe no estoque aparece no HTML
         self.driver.get(self.live_server_url + "/register/")
@@ -104,6 +108,7 @@ class plataformTests(StaticLiveServerTestCase):
         except:
             assert False, "Validação 1 - Produto não encontrado na tabela."
 
+    ## ok    
     def test_27_vd2(self):
         # Teste para verificar o HTML Retorna um produto que já existe
         self.driver.get(self.live_server_url + "/register/")
@@ -145,6 +150,7 @@ class plataformTests(StaticLiveServerTestCase):
             assert True
             print("Validação 2 - O produto não foi encontrado, o teste foi validado com sucesso.")
 
+    ##ok
     def test_5(self):
         # Verifica se produtos com estoque mínimo irão ser retornados quando forem solicitados
         self.driver.get(self.live_server_url + "/register/")
@@ -199,6 +205,7 @@ class plataformTests(StaticLiveServerTestCase):
         except:
             assert False, "Validação 1 - Produto não encontrado na tabela de estoque mínimo, há um erro."
 
+    ##ok
     def test_3_vd1(self):
         # Verifica se consegue vender uma quantidade de produtos maior que a do estoque
         self.driver.get(self.live_server_url + "/register/")
@@ -224,8 +231,14 @@ class plataformTests(StaticLiveServerTestCase):
         pesquisarVenda = self.driver.find_element(By.XPATH, "//input[@name='search-area']")
         pesquisarVenda.send_keys("Iphone 14 1")
 
-        add_button = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
-        add_button.click()
+        add_product_cart = self.driver.find_element(By.XPATH,"//button[@class='add-to-cart-btn']")
+
+        if add_product_cart.is_enabled():
+            self.driver.execute_script("arguments[0].scrollIntoView();", add_product_cart)
+            add_product_cart.click()
+        else:
+            # O elemento está desabilitado, faça algo aqui, se necessário
+            print("O elemento está desabilitado.")
 
         sleep(1)
 
@@ -249,7 +262,8 @@ class plataformTests(StaticLiveServerTestCase):
             alert.accept()
         except:
             assert False, "Validação 1 - Resultado diferente do esperado, há um erro."
-            
+    
+    ##ok   
     def test_3_vd2(self):
         self.driver.get(self.live_server_url + "/register/")
 
@@ -275,8 +289,16 @@ class plataformTests(StaticLiveServerTestCase):
             searchArea.send_keys(f"Iphone 14 {i}")
             searchArea.send_keys(Keys.ENTER)
             sleep(1)
-            addButton = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
-            addButton.click()
+
+            add_product_cart = self.driver.find_element(By.XPATH,"//button[@class='add-to-cart-btn']")
+
+            if add_product_cart.is_enabled():
+                self.driver.execute_script("arguments[0].scrollIntoView();", add_product_cart)
+                add_product_cart.click()
+            else:
+                # O elemento está desabilitado, faça algo aqui, se necessário
+                print("O elemento está desabilitado.")
+
             searchArea.send_keys(Keys.BACKSPACE * len(searchArea.get_attribute('value')))
             sleep(1)
 
@@ -293,6 +315,7 @@ class plataformTests(StaticLiveServerTestCase):
 
     #Entrega 4#
 
+    ##ok
     def test_14_vd1(self):
 
         self.driver.get(self.live_server_url + "/register/")
@@ -307,8 +330,14 @@ class plataformTests(StaticLiveServerTestCase):
 
         self.driver.get(self.live_server_url + "/vendas/")
 
-        add_product_cart = self.driver.find_element(By.XPATH, "//button[@class='add-to-cart-btn']")
-        add_product_cart.click()
+        add_product_cart = self.driver.find_element(By.XPATH,"//button[@class='add-to-cart-btn']")
+
+        if add_product_cart.is_enabled():
+            self.driver.execute_script("arguments[0].scrollIntoView();", add_product_cart)
+            add_product_cart.click()
+        else:
+            # O elemento está desabilitado, faça algo aqui, se necessário
+            print("O elemento está desabilitado.")
 
         discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
         discount.send_keys("101")
@@ -323,7 +352,7 @@ class plataformTests(StaticLiveServerTestCase):
             print("O produto não foi vendido, teste validado.")
         except:
             assert False, "A venda foi realizada, há um erro."
-
+    ##ok
     def test_14_vd2(self):
         self.driver.get(self.live_server_url + "/register/")
 
@@ -337,8 +366,22 @@ class plataformTests(StaticLiveServerTestCase):
 
         self.driver.get(self.live_server_url + "/vendas/")
 
-        add_product_cart = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
-        add_product_cart.click()
+        add_product_cart = self.driver.find_element(By.XPATH, "//button[@class='add-to-cart-btn']")
+
+        if add_product_cart.is_enabled():
+            if not add_product_cart.is_displayed():
+            # Rolar a página para que o elemento fique visível
+                actions = ActionChains(self.driver)
+                actions.move_to_element(add_product_cart).perform()
+            # Mover o mouse para fora da área do elemento sobreposto
+            actions = ActionChains(self.driver)
+            actions.move_by_offset(0, -100).perform()
+            # Clicar no botão
+            add_product_cart.click()
+        else:
+            # O elemento está desabilitado, faça algo aqui, se necessário
+            print("O elemento está desabilitado.")
+
 
         discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
         discount.send_keys("-10")
@@ -353,7 +396,7 @@ class plataformTests(StaticLiveServerTestCase):
             print("O produto não foi vendido, teste validado.")
         except:
             assert False, "A venda foi realizada, há um erro."
-    
+    ##ok
     def test_14_vd3(self):
         self.driver.get(self.live_server_url + "/register/")
 
@@ -367,8 +410,22 @@ class plataformTests(StaticLiveServerTestCase):
 
         self.driver.get(self.live_server_url + "/vendas/")
 
-        add_product_cart = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
-        add_product_cart.click()
+        add_product_cart = self.driver.find_element(By.XPATH, "//button[@class='add-to-cart-btn']")
+
+        if add_product_cart.is_enabled():
+            if not add_product_cart.is_displayed():
+            # Rolar a página para que o elemento fique visível
+                actions = ActionChains(self.driver)
+                actions.move_to_element(add_product_cart).perform()
+            # Mover o mouse para fora da área do elemento sobreposto
+            actions = ActionChains(self.driver)
+            actions.move_by_offset(0, -100).perform()
+            # Clicar no botão
+            add_product_cart.click()
+        else:
+            # O elemento está desabilitado, faça algo aqui, se necessário
+            print("O elemento está desabilitado.")
+
 
         discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
         discount.send_keys("10")
@@ -384,7 +441,7 @@ class plataformTests(StaticLiveServerTestCase):
             print("O produto foi vendido e o desconto está correto, teste validado.")
         except:
             assert False, "Há um erro."
-
+    ##ok
     def test_29_vd1(self):
         self.driver.get(self.live_server_url + "/register/")
 
@@ -407,7 +464,7 @@ class plataformTests(StaticLiveServerTestCase):
             print("In select tag exists the option 'Telefones'. Test validated.")
         except AssertionError:
             print("There is an error.")
-    
+    ##ok
     def test_29_vd2(self):
         self.driver.get(self.live_server_url + "/register/")
 
@@ -430,7 +487,7 @@ class plataformTests(StaticLiveServerTestCase):
             print("All categories have the text 'Telefones'. Test validated.")
         except AssertionError as e:
             print(str(e))
-    ##refatorar
+    ##refatorar ok
     def test_29_vd3(self):
         self.driver.get(self.live_server_url + "/register/")
         self.driver.refresh()
