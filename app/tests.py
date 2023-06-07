@@ -307,7 +307,7 @@ class plataformTests(StaticLiveServerTestCase):
 
         self.driver.get(self.live_server_url + "/vendas/")
 
-        add_product_cart = self.driver.find_element(By.CLASS_NAME, "add-to-cart-btn")
+        add_product_cart = self.driver.find_element(By.XPATH, "//button[@class='add-to-cart-btn']")
         add_product_cart.click()
 
         discount = self.driver.find_element(By.XPATH, "//input[@name='discount']")
