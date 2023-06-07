@@ -8,7 +8,7 @@ from collections import Counter
 from selenium import webdriver
 from time import sleep
 
-
+##
 def userRegister(self):
     username = self.driver.find_element(By.XPATH, "//input[@name='username']")
     username.send_keys("kauan123@")
